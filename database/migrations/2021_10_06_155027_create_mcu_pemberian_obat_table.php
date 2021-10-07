@@ -26,12 +26,12 @@ class CreateMcuPemberianObatTable extends Migration
                 ->references('id')
                 ->on('penghuni');
 
-            $table->string('id_obat');
+            // $table->string('id_obat');
             // $table->foreign('id_obat')
             //     ->references('id')
             //     ->on('obat');
 
-            $table->float('dosis',5,2);
+            // $table->float('dosis',5,2);
             // $table->integer('id_cek_obat');
             // $table->foreign('id_cek_obat')
             //     ->references('id')

@@ -21,10 +21,10 @@ class CreateMcuCekObatTable extends Migration
                 ->references('id')
                 ->on('users');
 
-            $table->integer('id_penghuni');
-            $table->foreign('id_penghuni')
-                ->references('id')
-                ->on('penghuni');
+            // $table->integer('id_penghuni');
+            // $table->foreign('id_penghuni')
+            //     ->references('id')
+            //     ->on('penghuni');
 
             $table->string('id_obat');
             // $table->foreign('id_obat')

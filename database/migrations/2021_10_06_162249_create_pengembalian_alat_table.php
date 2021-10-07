@@ -15,7 +15,8 @@ class CreatePengembalianAlatTable extends Migration
     {
         Schema::create('pengembalian_alat', function (Blueprint $table) {
             // $table->id();
-            $table->string('id')->primary();
+            // $table->string('id')->primary();
+            $table->integer('id')->primary();
             $table->string('id_pegawai',20);
             $table->foreign('id_pegawai')
                 ->references('id')
