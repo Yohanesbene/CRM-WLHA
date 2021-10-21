@@ -14,7 +14,8 @@ class RelationIdpengembalianAlat extends Migration
     public function up()
     {
         Schema::table('peminjaman_alat', function (Blueprint $table) {
-            $table->string('id_pengembalian_alat');
+            $table->integer('id_pengembalian_alat')
+            ->after('ukuran')->nullable();
             $table->foreign('id_pengembalian_alat')
                 ->references('id')
                 ->on('pengembalian_alat');

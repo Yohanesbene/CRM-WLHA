@@ -17,6 +17,7 @@ class CreateRoleTable extends Migration
             // $table->id();
             $table->integer('id')->primary();
             $table->string('keterangan');
+            $table->string('kode')->unique();
             // $table->timestamps();
         });
     }
