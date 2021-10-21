@@ -30,6 +30,8 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.', 'namespace'=>'Admin'], function
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/pegawai/tambah', [AdminController::class, 'tambahPegawai'])->name('pegawai.tambah');
     Route::post('/pegawai/tambah/proses', [AdminController::class, 'prosesTambahPegawai'])->name('pegawai.prosestambah');
+    Route::get('/pegawai/ubahpassword', [AdminController::class, 'ubahpassword'])->name('pegawai.ubahpassword');
+    Route::post('/pegawai/ubahpassword/proses', [AdminController::class, 'prosesUbahPassword'])->name('pegawai.prosesubahpassword');
 });
 
 //User

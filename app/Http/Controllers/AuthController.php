@@ -9,13 +9,7 @@ use Illuminate\Support\Facades\Input;
 
 class AuthController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->User = new User();
-    // }
-
     public function login(Request $request){
-
         $username = $request->username;
         $password = $request->password;
 
@@ -52,10 +46,12 @@ class AuthController extends Controller
     }
 
     public function error($id, $urls){
-
         $urls = str_replace('--', '/', $urls);
         if($id == 1){
             return redirect('/')->with('auth_error', 'Anda belum login');
+        } else if($id == 2){ //force logout
+            session()->forget('auth_wlha');
+            return redirect('/')->with('auth_error', 'Password Anda baru saja berubah, Harap login kembali');
         } else{
             return redirect($urls)->with('auth_error', 'Maaf halaman tersebut tidak diperuntukkan role anda');
         }

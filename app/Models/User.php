@@ -10,6 +10,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class User extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'identifier';
+
+    public function login($username){
+        $login = DB::table('users')
+        ->where('username', $username)
+        ->get();
+        if(!empty($login)){
+            return $login[0];
+        } else{
+            return $login[] = null;
+        }
+    }
+
     public function tambah($data){
         $return['error_tambah'] = null;
 
@@ -24,7 +37,7 @@ class User extends Model
 
         $check_nik = DB::table('users')->where('nik', $data->nik)->get();
         if(count($check_nik) > 0){
-            $return['error_tambah']['nik'] = $data->nik;
+            $return['error_tambah']['nik'] = 'NIK sudah terdaftar';
         }
         // $return['error_tambah']['tgl_lahir'] = $data->tgl_lahir;
         // $return['error_tambah']['gender'] = $data->gender;
@@ -104,6 +117,34 @@ class User extends Model
 
         }
         else{
+            return $return;
+        }
+    }
+
+    public function get_ganti_password(){
+        $username = DB::table('users')
+        ->select('id','username','nik')
+        ->get()
+        ->toArray();
+        return $username;
+    }
+
+    public function ganti_password($data){
+
+        $return['error_ubahpassword'] = null;
+        $check_id = DB::table('users')
+            ->where('id', $data->id_atau_username)
+            ->orWhere('username', $data->id_atau_username)
+            ->get();
+
+        if(count($check_id) > 0){
+            DB::table('users')
+            ->where('id', $data->id_atau_username)
+            ->update(['password' => Hash::make($data->password)]);
+            return $return;
+        }
+        else{
+            $return['error_ubahpassword']['id_atau_username'] = 'ID / Username tidak ditemukan';
             return $return;
         }
 

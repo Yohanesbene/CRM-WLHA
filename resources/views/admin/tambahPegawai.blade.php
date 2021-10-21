@@ -1,13 +1,13 @@
 @extends('layouts.appadmin')
 
 @section('contents')
-@if (count($errors) > 0)
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+    @if (count($errors) > 0)
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
     <form class="" action="/admin/pegawai/tambah/proses" method="POST">
         {{ csrf_field() }}
     {{-- <form id="pendaftaran" class="" > --}}
@@ -38,13 +38,26 @@
                     <br>
                 @endif
 
-
+            @if(Session::has('role'))
+                Tes TES
+            @endif
             Status
-            <select id="id_level" name="id_level" class="" value="{{ old('id_level') }}">
-            @foreach ($role as $r)
-            <option value="{{ $r->id }}">{{ $r->keterangan }}</option>
-            @endforeach
+            <select id="id_level" name="id_level" class="" >
+                @if (!empty($role))
+                    @foreach ($role as $r)
+                        <option value="{{ $r->id}}" @if (old('id_level') == $r->id) selected @endif>{{ $r->keterangan}}</option>
+                    @endforeach
+
+                @endif
+
+
             </select>
+            @if(!empty($role))
+            TESTESTES {{ old('id_level') }}
+            @foreach ($role as $r)
+            {{ $r->id }}
+            @endforeach
+            @endif
 <br>
                 @if (Session::has('error_tambah.id_level'))
                     {{ Session::get('error_tambah.id_level')}}
