@@ -19,10 +19,10 @@ use App\Http\Controllers\AdminController;
 Route::get('/', function () {
     return view('auth.login');
 })->name('login.get');
-Route::group(['prefix'=>'auth', 'namespace'=>'Auth'], function(){
-    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::group(['prefix'=>'auth', 'as'=>'auth.', 'namespace'=>'Auth'], function(){
+    Route::post('/login', [AuthController::class, 'login'])->name('login.proses');
     Route::get('/login/error/{id}/{urls}', [AuthController::class, 'error'])->name('login.error');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout.get');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 //admin
