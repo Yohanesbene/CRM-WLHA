@@ -2,13 +2,15 @@
 
 @section('contents')
     @if (count($errors) > 0)
+    <div class="py-3 px-5 mb-4 bg-red-100 text-red-900 text-sm rounded-md border border-red-200" role="alert">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
+    </div>
     @endif
-    <form class="" action="/admin/pegawai/tambah/proses" method="POST">
+    <form class="" action="{{route('admin.pegawai.prosestambah')}}" method="POST">
         {{ csrf_field() }}
     {{-- <form id="pendaftaran" class="" > --}}
         <div>
@@ -38,9 +40,6 @@
                     <br>
                 @endif
 
-            @if(Session::has('role'))
-                Tes TES
-            @endif
             Status
             <select id="id_level" name="id_level" class="" >
                 @if (!empty($role))
@@ -52,12 +51,6 @@
 
 
             </select>
-            @if(!empty($role))
-            TESTESTES {{ old('id_level') }}
-            @foreach ($role as $r)
-            {{ $r->id }}
-            @endforeach
-            @endif
 <br>
                 @if (Session::has('error_tambah.id_level'))
                     {{ Session::get('error_tambah.id_level')}}

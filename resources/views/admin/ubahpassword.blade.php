@@ -7,7 +7,7 @@
             @endforeach
         </ul>
     @endif
-<form class="" action="/admin/pegawai/ubahpassword/proses" method="POST">
+<form class="" action="{{route('admin.pegawai.prosesubahpassword')}}" method="POST">
     {{ csrf_field() }}
     <label for="id_atau_username">ID / Username / NIK</label>
     <input list="id_atau_usernames" name="id_atau_username" id="id_atau_username" value="{{ old('id_atau_username') }}">
