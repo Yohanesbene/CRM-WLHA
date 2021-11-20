@@ -1,7 +1,5 @@
-@extends('layouts.app')
-
-@section('admin')
-
+<x-app-layout>
+{{-- <x-slot name="admin"> --}}
     @if (Session::has('auth_wlha'))
         @if (Session::get('auth_wlha.0.id_level') != 1 )
             @php
@@ -24,8 +22,9 @@
             @if(Session::has('auth_error'))
                 <script type="text/javascript">this.myalert = "<?php echo Session::get('auth_error')?>"; alert(myalert);</script>
             @endif
-            @yield('contents')
-
+            {{-- @yield('contents') --}}
+            {{ $slot }}
+    
         @endif
     @else
         {{-- Not yet login --}}
@@ -34,4 +33,12 @@
             exit();
         @endphp
     @endif
-@endsection
+
+{{-- </x-slot> --}}
+
+{{-- @extends('layouts.app') --}}
+
+{{-- @section('admin') --}}
+
+{{-- @endsection --}}
+</x-app-layout>

@@ -1,6 +1,9 @@
-@extends('layouts.appadmin')
+<x-appadmin-layout>
 
-@section('contents')
+
+{{-- @extends('layouts.appadmin') --}}
+
+{{-- @section('contents') --}}
     ADMIN DASHBOARD <br>
     YANG LOGIN SIAPA ? <br>
     -------------------------------------------------------------------------------------------------<br>
@@ -17,4 +20,5 @@
             @endfor
         @endif
     </div>
-@endsection
+{{-- @endsection --}}
+</x-appadmin-layout>
