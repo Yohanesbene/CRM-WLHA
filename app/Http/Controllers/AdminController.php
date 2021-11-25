@@ -15,7 +15,8 @@ class AdminController extends Controller
         $this->Role_User = new Role_User();
     }
     public function dashboard(){
-        return view('admin.dashboard');
+        $role =  ['role' => $this->Role_User->get_role()];
+        return view('admin.dashboard')->with($role);
     }
 
     public function tambahPegawai(Request $request){
