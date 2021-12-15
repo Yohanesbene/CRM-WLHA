@@ -14,9 +14,17 @@ class AdminController extends Controller
         $this->User = new User();
         $this->Role_User = new Role_User();
     }
-    public function dashboard(){
-        $role =  ['role' => $this->Role_User->get_role()];
-        return view('admin.dashboard')->with($role);
+    public function kepegawaian(){
+        $return =  [
+            'role' => $this->Role_User->get_role(),
+            'user' => $this->User->get_user()
+        ];
+
+        return view('admin.kepegawaian')->with($return);
+    }
+
+    public function kepegawaianredirect(){
+        return redirect('kepegawaian/');
     }
 
     public function tambahPegawai(Request $request){
@@ -25,6 +33,7 @@ class AdminController extends Controller
     }
 
     public function prosesTambahPegawai(Request $request){
+        // return $request->foto->getClientOriginalExtension();
         $message = [
             'required' => 'Harap isi :attribute',
             'same' => ':other tidak sesuai dengan :attribute',
@@ -32,7 +41,9 @@ class AdminController extends Controller
             'max' => ':attribute minimal :max karakter',
             'integer' => ':attribute hanya boleh karakter angka saja',
             'date' => ':attribute tidak valid',
-            'nik.regex' => ':attribute hanya boleh angka saja'
+            'nik.regex' => ':attribute hanya boleh angka saja',
+            'mimes' => ':attribute hanya bole jpg, jpeg atau png'
+
         ];
         $this->validate($request, [
             'username' => 'required',
@@ -49,8 +60,10 @@ class AdminController extends Controller
             'mulaimasuk' => 'required|date',
             'ijazah' => 'required',
             'title' => 'required',
-            // 'status_kepegawaian' => 'required',
-            // 'pelatihan' => 'required',
+            'status_kepegawaian' => 'required',
+            'pelatihan' => 'required',
+            'foto' => 'required|mimes:jpg,jpeg,png'
+
         ],$message);
 
         if(empty($request->foto)){
@@ -72,8 +85,11 @@ class AdminController extends Controller
             return redirect()->back()->with($error_tambah,$role);
         } else {
             $message_success = ['message_success' => ['Data Pegawai Berhasil ditambahkan']];
-            return redirect('/admin/dashboard')->with($message_success);
+
+            return redirect('/admin/kepegawaian')->with($message_success);
         }
+
+        // return $extension;
     }
 
     public function ubahpassword(){
@@ -88,7 +104,7 @@ class AdminController extends Controller
             'min' => ':attribute minimal :min karakter',
         ];
         $this->validate($request, [
-            'id_atau_username' => 'required',
+            'id' => 'required',
             'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password',
         ],$message);
@@ -112,8 +128,29 @@ class AdminController extends Controller
             }
             else {
                 $message_success = ['message_success' => ['Password Berhasil ditambahkan']];
-                return redirect('/admin/dashboard')->with($message_success);
+                return redirect('/admin/kepegawaian')->with($message_success);
             }
         }
     }
+
+    public function detail(Request $request){
+        $return =
+            $this->User->get_detail($request->id);
+        return $return;
+    }
+
+    public function getEdit(Request $request){
+
+        $return =  [
+            'role' => $this->Role_User->get_role(),
+            'user' => $this->User->get_detail($request->id)
+        ];
+        return $return;
+    }
+
+    public function prosesEdit(Request $request){
+        $update =$this->User->edit($request);
+        return $update;
+    }
 }
+//Penghuni : id, nama, penanggunajawab, kamar

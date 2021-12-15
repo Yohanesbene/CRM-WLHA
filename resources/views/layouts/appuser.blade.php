@@ -11,6 +11,7 @@
         @if (Session::get('auth_wlha.0.id_level') == 1 )
             @php
                 $url = redirect()->getUrlGenerator()->previous();
+                var_dump($url);
                 if(substr($url, 0,4)=='http'){
                     $position = strpos($url, '/');
                     $url = substr($url,$position+2,strlen($url));
