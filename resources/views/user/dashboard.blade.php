@@ -1,6 +1,9 @@
-@extends('layouts.appuser')
+<x-app-user-layout>
 
-@section('contents')
+
+{{-- @extends('layouts.appuser') --}}
+
+{{-- @section('contents') --}}
     USER DASHBOARD
 
     {{-- <div>
@@ -13,4 +16,5 @@
             </div>
         @endif
     </div> --}}
-@endsection
+{{-- @endsection --}}
+</x-app-user-layout>

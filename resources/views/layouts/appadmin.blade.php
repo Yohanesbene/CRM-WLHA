@@ -22,8 +22,7 @@
             @if(Session::has('auth_error'))
                 <script type="text/javascript">this.myalert = "<?php echo Session::get('auth_error')?>"; alert(myalert);</script>
             @endif
-            {{-- @yield('contents') --}}
-            {{ $slot }}
+            @include('layouts.navigation')
     
         @endif
     @else

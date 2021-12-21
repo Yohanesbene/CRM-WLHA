@@ -11,6 +11,7 @@
         @if (Session::get('auth_wlha.0.id_level') == 1 )
             @php
                 $url = redirect()->getUrlGenerator()->previous();
+                var_dump($url);
                 if(substr($url, 0,4)=='http'){
                     $position = strpos($url, '/');
                     $url = substr($url,$position+2,strlen($url));
@@ -30,7 +31,7 @@
                 <script type="text/javascript">this.myalert = "<?php echo Session::get('auth_error')?>"; alert(myalert);</script>
             @endif
             {{-- @yield('contents') --}}
-            {{ $slot }}
+            @include('layouts.navigation')
         @endif
     @else
         {{-- Not yet login --}}

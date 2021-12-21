@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class appuser extends Component
+class AppAdminLayout extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class appuser extends Component
      */
     public function render()
     {
-        return view('layouts.appuser');
+        return view('layouts.appadmin');
     }
 }

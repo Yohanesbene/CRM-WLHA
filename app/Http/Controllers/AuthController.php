@@ -20,6 +20,7 @@ class AuthController extends Controller
         ],$message);
 
         $login = User::where('username', $username)->get();
+        // dd($login);
 
         if(session()->has('auth_wlha')){
             session()->forget('auth_wlha');
@@ -27,11 +28,15 @@ class AuthController extends Controller
         if(count($login) == 0){
             return redirect('/')->with('login_error', 'Maaf username tidak ditemukan');
         } else if(Hash::check($password, $login->pluck('password')[0])){
-            session()->put('auth_wlha', $login);
-            if($login->pluck('id_level')[0] == 1){
-                return redirect('/admin/dashboard');
-            } else {
-                return redirect('/user/dashboard');
+            if($login->pluck('status')[0] == "1"){
+                session()->put('auth_wlha', $login);
+                if($login->pluck('id_level')[0] == 1){
+                    return redirect('/admin/kepegawaian');
+                } else {
+                    return redirect('/user/dashboard');
+                }
+            }else{
+                return redirect('/')->with('login_error', 'Akun anda tidak aktif, segera hubungi admin');
             }
         } else if(!Hash::check($password, $login->pluck('password')[0])){
             $request->flashExcept('password');
@@ -55,5 +60,9 @@ class AuthController extends Controller
         } else{
             return redirect($urls)->with('auth_error', 'Maaf halaman tersebut tidak diperuntukkan role anda');
         }
+    }
+
+    public function errorLogin(){
+        return redirect('/')->with('login_error', 'Maaf halaman sedang dalam perbaikan');
     }
 }
