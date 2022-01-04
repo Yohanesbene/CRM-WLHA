@@ -81,7 +81,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col table-responsive" id="data-result">
+        <div class="col" id="data-result">
             @include('transaksiobat/data_transaksi')
         </div>
     </div>
@@ -117,13 +117,16 @@
         }
 
         $(document).on('keyup', '#searchKeterangan', function() {
-            var query = $('#searchKeterangan').val();
-            var column_name = $('#hidden_column_name').val();
-            var sort_type = $('#hidden_sort_type').val();
-            var page = 1;
-            var fromDate = $('#fromDate').val();
-            var untilDate = $('#untilDate').val();
-            fetch_data(page, query, fromDate, untilDate);
+            clearTimeout(timeout)
+            timeout = setTimeout(function() {
+                var query = $('#searchKeterangan').val();
+                var column_name = $('#hidden_column_name').val();
+                var sort_type = $('#hidden_sort_type').val();
+                var page = 1;
+                var fromDate = $('#fromDate').val();
+                var untilDate = $('#untilDate').val();
+                fetch_data(page, query, fromDate, untilDate);
+            }, 200);
         });
 
         $(document).on('click', '.sorting', function() {

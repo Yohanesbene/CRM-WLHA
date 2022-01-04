@@ -20,7 +20,7 @@
 </style>
 <div class="container fs-2">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-sm-12 mx-auto">
             <div class="card mt-4">
                 <div class="row">
                     <div class="col-8">
@@ -29,8 +29,8 @@
                             <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                             <p class="card-text fs-3">Kode Obat : {{$obat->kode_slug}}</p>
                             <p class="card-text fs-3">Stok Obat : {{$obat->stokobat}}</p>
-                            <a href="{{url('/tambah_stok/'.$obat->id)}}" class="card-link">Tambahkan stok</a>
-                            <a href="{{url('/kurang_stok/'.$obat->id)}}" class="card-link">Kurangi stok</a>
+                            <a href="{{url('/tambah_stok/'.$obat->id)}}" class="btn btn-success card-link fs-3 my-1">Tambahkan stok</a>
+                            <a href="{{url('/kurang_stok/'.$obat->id)}}" class="btn btn-danger card-link fs-3 my-1">Kurangi stok</a>
                         </div>
                     </div>
                     <div class="col-4">
@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             <?php if (session()->has('message')) : ?>
                 <div class="alert alert-success alert-dismissible fade show fs-2" role="alert">
                     {!!session()->get('message')!!}
@@ -52,8 +52,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
-
+        <div class="col-12">
             <div class="form-group">
                 <div class="input-group my-2">
                     <input type="text" name="searchKeterangan" id="searchKeterangan" class="form-control fs-2" placeholder="Cari Keterangan" />
@@ -71,11 +70,6 @@
                     <span class="input-group-text fs-2">sampai</span>
                     <input id="untilDate" type="text" class="form-control fs-2" value="{{now()->format('d-m-Y')}}" placeholder="Sampai tanggal">
 
-                    <!-- <button class="btn btn-success" id='searchDate'>
-                        <span class="d-block fs-2">
-                            <i class="fa fa-search"></i>
-                        </span>
-                    </button> -->
                     <button class="btn btn-danger" id='delDate'>
                         <span class="d-block fs-2">
                             <i class="fa fa-times"></i>
@@ -86,7 +80,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col table-responsive" id="data-result">
+        <div class="col-12 table-responsive" id="data-result">
             @include('detailobat/detail_data')
         </div>
     </div>
@@ -101,8 +95,10 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     $(document).ready(function() {
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        var timeout = null;
 
         function clear_icon() {
             $('#id_icon').html('');
@@ -110,7 +106,7 @@
         }
 
         function fetch_data(page, query, fromDate, untilDate) {
-            console.log("{{$id}}");
+            // console.log("{{$id}}");
             $.ajax({
                 url: "/detail_obat/{{$id}}/detail_data?query=" + query + "&from=" + fromDate + "&until=" + untilDate + "&page=" + page,
                 type: 'GET',
@@ -122,13 +118,16 @@
         }
 
         $(document).on('keyup', '#searchKeterangan', function() {
-            var query = $('#searchKeterangan').val();
-            var column_name = $('#hidden_column_name').val();
-            var sort_type = $('#hidden_sort_type').val();
-            var page = 1;
-            var fromDate = $('#fromDate').val();
-            var untilDate = $('#untilDate').val();
-            fetch_data(page, query, fromDate, untilDate);
+            clearTimeout(timeout)
+            timeout = setTimeout(function() {
+                var query = $('#searchKeterangan').val();
+                var column_name = $('#hidden_column_name').val();
+                var sort_type = $('#hidden_sort_type').val();
+                var page = 1;
+                var fromDate = $('#fromDate').val();
+                var untilDate = $('#untilDate').val();
+                fetch_data(page, query, fromDate, untilDate);
+            }, 200);
         });
 
         $(document).on('click', '.sorting', function() {
