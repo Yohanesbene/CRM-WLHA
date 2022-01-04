@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="container">
-
+    <div class="row my-3">
+        <div class="col text-center">
+            <h1>Tambahkan jenis obat baru</h1>
+        </div>
+    </div>
     <div class="row fs-3">
         <div class="col-1"></div>
         <div class="col-10">
@@ -10,14 +14,14 @@
                 @csrf
                 <div class="mb-3">
                     <label for="namaobat" class="form-label fs-3">Nama Obat : </label>
-                    <div class="input-group">
-                        <input type="text" class="form-control fs-3" name="namaobat" id="namaobat" value="{{ $obat }}" aria-label="Disabled input example" readonly required>
-                        <a class="btn btn-primary" id='editNamaObat'>
-                            <span class="d-block fs-2">
-                                Edit nama obat <i class="fas fa-edit"></i></i>
-                            </span>
-                        </a>
-                    </div>
+                    <!-- <div class="input-group"> -->
+                    <input type="text" class="form-control fs-3" name="namaobat" id="namaobat" value="{{ $obat }}" aria-label="Disabled input example" readonly required>
+                    <a class="btn btn-primary" id='editNamaObat'>
+                        <span class="d-block fs-2">
+                            Koreksi nama obat <i class="fas fa-edit"></i></i>
+                        </span>
+                    </a>
+                    <!-- </div> -->
                 </div>
                 <div class="mb-3">
                     <label class="form-label fs-3">Jenis Form : </label>
