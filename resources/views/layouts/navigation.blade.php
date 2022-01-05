@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-bold uppercase text-center text-indigo-500 tracking-wide">ASKEP</h1>
             </div>
             @if (Session::get('auth_wlha.0.id_level') == 1 )
-                <a href="#" class="flex mt-4 p-4 items-center bg-indigo-600 rounded-md space-x-4 text-white font-semibold text-lg hover:text-indigo-600 transition duration-200">
+                <a href="{{url('/admin/kepegawaian')}}" class="flex mt-4 p-4 items-center bg-indigo-600 rounded-md space-x-4 text-white font-semibold text-lg hover:text-indigo-600 transition duration-200">
                     <svg class="w-6 h-6 mr-4 text-white hover:text-indigo-600 transition duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                     </svg>
                     Kepegawaian
@@ -27,7 +27,7 @@
                 </a>
             @endif
             @if (Session::get('auth_wlha.0.id_level') == 6 || Session::get('auth_wlha.0.id_level') == 1)
-                <a href="#" class="flex mt-4 p-4 items-center space-x-4 text-gray-400 font-semibold text-lg hover:text-indigo-600 transition duration-200">
+                <a href="{{url('/daftar_obat')}}" class="flex mt-4 p-4 items-center space-x-4 text-gray-400 font-semibold text-lg hover:text-indigo-600 transition duration-200">
                     <svg class="w-6 h-6 mr-4 text-gray-400 hover:text-indigo-600 transition duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                     </svg>
                     Inventaris
