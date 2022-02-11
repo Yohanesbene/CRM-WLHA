@@ -23,6 +23,6 @@ class AppUserLayout extends Component
      */
     public function render()
     {
-        return view('layouts.appadmin');
+        return view('layouts.appuser');
     }
 }

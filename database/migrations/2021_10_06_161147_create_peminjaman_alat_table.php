@@ -22,7 +22,7 @@ class CreatePeminjamanAlatTable extends Migration
                 ->references('id')
                 ->on('users');
 
-            $table->integer('id_penghuni');
+            $table->unsignedInteger('id_penghuni');
             $table->foreign('id_penghuni')
                 ->references('id')
                 ->on('penghuni');
@@ -32,6 +32,8 @@ class CreatePeminjamanAlatTable extends Migration
             // $table->int('idpengembalian')->nullable();
             $table->datetime('waktu');
             // $table->timestamps();
+            $table->integer('deleted')->unsigned()->nullable()->default(0);
+
         });
     }
 

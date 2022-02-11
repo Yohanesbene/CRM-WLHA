@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class UserSeeder extends Seeder
 {
@@ -17,7 +18,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        User::where('id','ADM-20211019-001')->delete();
+        if (Schema::hasTable('users')) {
+            DB::table('users')->truncate();
+        }
+
+        User::where('id', 'ADM-20211019-001')->delete();
         DB::table('users')->insert([
             'id' => 'ADM-20211019-001',
             'username' => 'admin',
@@ -36,7 +41,7 @@ class UserSeeder extends Seeder
         ]);
 
         //User
-        User::where('id','APR-20211019-2001')->delete();
+        User::where('id', 'APR-20211019-2001')->delete();
         DB::table('users')->insert([
             'id' => 'APR-20211019-001',
             'username' => 'perawat1',
@@ -52,7 +57,9 @@ class UserSeeder extends Seeder
             'mulaimasuk' => '2021-10-19',
             'ijazah' => 'ijazah_prw-20211019-001.jpg',
             'title' => 'perawat',
-
         ]);
+
+        //Farmasi
+
     }
 }

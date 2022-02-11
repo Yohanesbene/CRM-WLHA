@@ -16,13 +16,14 @@ class CreatePenghuniTable extends Migration
         Schema::create('penghuni', function (Blueprint $table) {
             // $table->id();
             // $table->string('id',)->primary();
-            $table->integer('id')->primary();
-            $table->integer('id_penanggung_jawab');
+            $table->increments('id');
+            $table->unsignedInteger('id_penanggung_jawab');
             $table->foreign('id_penanggung_jawab')
             ->references('id')
             ->on('penanggung_jawab')
             ;
-
+            $table->string('no_induk', 40);
+            $table->unique(['no_induk', 'id']);
             $table->string('nama');
             $table->string('nickname');
             $table->string('foto')->nullable();

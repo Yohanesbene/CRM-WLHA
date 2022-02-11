@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Input;
 
 class AuthController extends Controller
 {
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $username = $request->username;
         $password = $request->password;
 
@@ -17,52 +18,55 @@ class AuthController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'password' => 'required'
-        ],$message);
+        ], $message);
 
         $login = User::where('username', $username)->get();
         // dd($login);
 
-        if(session()->has('auth_wlha')){
+        if (session()->has('auth_wlha')) {
             session()->forget('auth_wlha');
         }
-        if(count($login) == 0){
+        if (count($login) == 0) {
             return redirect('/')->with('login_error', 'Maaf username tidak ditemukan');
-        } else if(Hash::check($password, $login->pluck('password')[0])){
-            if($login->pluck('status')[0] == "1"){
+        } else if (Hash::check($password, $login->pluck('password')[0])) {
+            if ($login->pluck('status')[0] == "1") {
                 session()->put('auth_wlha', $login);
-                if($login->pluck('id_level')[0] == 1){
+                if ($login->pluck('id_level')[0] == 1) {
                     return redirect('/admin/kepegawaian');
                 } else {
-                    return redirect('/user/dashboard');
+                    return redirect('/user/medicalrecord');
                 }
-            }else{
+            } else {
                 return redirect('/')->with('login_error', 'Akun anda tidak aktif, segera hubungi admin');
             }
-        } else if(!Hash::check($password, $login->pluck('password')[0])){
+        } else if (!Hash::check($password, $login->pluck('password')[0])) {
             $request->flashExcept('password');
             return redirect('/')
-            ->with('login_error', 'Maaf password salah');
+                ->with('login_error', 'Maaf password salah');
         } else return redirect('/');
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->forget('auth_wlha');
         return redirect('/');
     }
 
-    public function error($id, $urls){
+    public function error($id, $urls)
+    {
         $urls = str_replace('--', '/', $urls);
-        if($id == 1){
+        if ($id == 1) {
             return redirect('/')->with('auth_error', 'Anda belum login');
-        } else if($id == 2){ //force logout
+        } else if ($id == 2) { //force logout
             session()->forget('auth_wlha');
             return redirect('/')->with('auth_error', 'Password Anda baru saja berubah, Harap login kembali');
-        } else{
+        } else {
             return redirect($urls)->with('auth_error', 'Maaf halaman tersebut tidak diperuntukkan role anda');
         }
     }
 
-    public function errorLogin(){
+    public function errorLogin()
+    {
         return redirect('/')->with('login_error', 'Maaf halaman sedang dalam perbaikan');
     }
 }
