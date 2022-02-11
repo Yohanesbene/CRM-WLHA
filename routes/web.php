@@ -46,8 +46,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
 
 //User
 Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'User'], function () {
-    Route::get('medicalrecord', [UserController::class, 'medicalRecord'])->name('medicalrecord');
-    Route::get('medicalrecord/fetch_data/', [UserController::class, 'fetch_data'])->name('medicalrecord.fetch_data');
+    Route::get('rekammedis', [UserController::class, 'rekamMedis'])->name('rekammedis');
+    Route::get('rekammedis/fetch_data/', [UserController::class, 'fetch_data'])->name('rekammedis.fetch_data');
     Route::get('detail_medis/{id}', [UserController::class, 'detail_medis'])->name('detail_medis');
     Route::get('tambah_mcu/{id}', [UserController::class, 'tambah_mcu'])->name('mcu.tambah');
     Route::post('simpan_mcu', [UserController::class, 'simpan_mcu'])->name('mcu.simpan');

@@ -9,23 +9,22 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     //
-    public function medicalRecord(Request $request)
+    public function rekamMedis(Request $request)
     {
         if($query = $request->input('query')){
             $query = $request->input('query');
             $data['query'] = $query;
-            $data['page_url'] = '/user/medicalrecord?query='.$query;
+            $data['page_url'] = '/user/rekammedis?query='.$query;
 
             $query = str_replace(" ", "%", $query);
 
             $data['penghuni'] = Penghuni::daftar_penghuni($query);
-            // $data['count'] = $data['penghuni']->count();
 
         } else {
-            $data['page_url'] = '/user/medicalrecord';
+            $data['page_url'] = '/user/rekammedis';
             $data['penghuni'] = Penghuni::paginate(10);
         };
-        return view('user.medicalrecord', $data);
+        return view('user.rekmed', $data);
     }
 
     public function detail_medis($id)
@@ -71,7 +70,7 @@ class UserController extends Controller
     public function fetch_data(Request $request)
     {
         $query = $request->input('query');
-        $data['page_url'] = '/user/medicalrecord?query='.$query;
+        $data['page_url'] = '/user/rekammedis?query='.$query;
         $data['query'] = $query;
 
         $query = str_replace(" ", "%", $query);
@@ -80,7 +79,7 @@ class UserController extends Controller
 
         $data['count'] = $data['penghuni']->count();
 
-        return view('user.daftar_penghuni', $data)->render();
+        return view('user.rekmed_daftar_penghuni', $data)->render();
     }
 
     public function tambah_mcu($id)

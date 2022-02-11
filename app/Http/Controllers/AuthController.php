@@ -34,7 +34,7 @@ class AuthController extends Controller
                 if ($login->pluck('id_level')[0] == 1) {
                     return redirect('/admin/kepegawaian');
                 } else {
-                    return redirect('/user/medicalrecord');
+                    return redirect('/user/rekammedis');
                 }
             } else {
                 return redirect('/')->with('login_error', 'Akun anda tidak aktif, segera hubungi admin');

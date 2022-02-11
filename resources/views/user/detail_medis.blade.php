@@ -1,9 +1,9 @@
 <x-app-user-layout>
     {{-- @section('contents') --}}
-    <div class="flex-auto bg-indigo-50 py-6 px-10">
+    <div class="flex flex-col bg-indigo-50 py-6 px-10">
         {{-- START: data penghuni --}}
-        <div class="block p-8 bg-white rounded-md">
-            <div class="flex flex-nowrap gap-3">
+        <div class="block flex-col p-8 bg-white rounded-md">
+            <div class="flex flex-col lg:flex-row gap-3">
                 <div>
                     <div class="w-48 h-48 bg-gray-200">
 
@@ -97,7 +97,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="grid grid-cols-2 gap-2 items-center justify-center text-lg">
-                                                        <div>{{ $row->{$k} }}</div>
+                                                        <div>{{ $row->{$k} }}{!! $satuan[$key] !!}</div>
                                                         <div class="flex place-content-end p-2">
                                                             <a href="{{ route('user.mcu.hapus', ['id' => $row->id, 'data' => $key, 'id_penghuni' => $penghuni->id]) }}">
                                                                 <button class="p-3 rounded-md bg-red-200 hover:bg-red-600 hover:text-gray-50">
@@ -145,7 +145,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="grid grid-cols-2 gap-2 items-center justify-center text-lg">
-                                                            <div>{{ $row->{$k} }}</div>
+                                                            <div>{{ $row->{$k} }}{!! $satuan[$key] !!}</div>
                                                             <div class="flex place-content-end p-2">
                                                                 <a href="{{ route('user.mcu.hapus', ['id' => $row->id, 'data' => $key, 'id_penghuni' => $penghuni->id]) }}">
                                                                     <button class="p-3 rounded-md bg-red-200 hover:bg-red-600 hover:text-gray-50">

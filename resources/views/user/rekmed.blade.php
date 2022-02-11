@@ -30,11 +30,11 @@
                         ?> />
                 </div>
                 <div class="overflow-x-auto" id="data-result">
-                    @include('user/daftar_penghuni')
+                    @include('user/rekmed_daftar_penghuni')
                 </div>
             </div>
+            <!-- END: Data Table -->
         </div>
-        <!-- END: Data Table -->
     </div>
     <script>
         $.ajaxSetup({

@@ -30,14 +30,16 @@
                 </a>
             @endif
             @if (in_array(Session::get('auth_wlha.0.id_level'), [2, 3, 4, 5, 6]))
-                <a href="{{ route('user.medicalrecord') }}"
-                    class="flex mt-4 p-4 items-center space-x-4 text-gray-400 font-semibold text-lg hover:text-indigo-600 transition duration-200">
-                    <svg class="w-6 h-6 mr-4 text-gray-400 hover:text-indigo-600 transition duration-200" fill="none"
+                <a href="{{ route('user.rekammedis') }}"
+                    class="
+                    {{ Request::segment(2) == 'rekammedis' ? 'bg-indigo-800 text-white' : 'text-gray-400 hover:text-indigo-600' }}
+                    flex mt-4 p-4 items-center space-x-4 font-semibold text-lg  transition duration-200">
+                    <svg class="{{ Request::segment(2) == 'rekammedis' ? 'text-white' : '' }} w-6 h-6 mr-4 transition duration-200" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
                     </svg>
-                    Medical Record
+                    Rekam Medis
                 </a>
             @endif
             @if (Session::get('auth_wlha.0.id_level') == 1)

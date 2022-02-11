@@ -24,7 +24,7 @@
                         <div class="flex items-center">
                             <a href="detail_medis/{{ $row->id }}"
                                 class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                                Rekam Data
+                                Rekam Medis
                             </a>
                         </div>
                     </td>
