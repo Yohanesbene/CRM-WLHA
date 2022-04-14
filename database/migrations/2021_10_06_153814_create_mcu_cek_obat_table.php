@@ -15,13 +15,13 @@ class CreateMcuCekObatTable extends Migration
     {
         Schema::create('mcu_cek_obat', function (Blueprint $table) {
             // $table->id();
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->string('id_pegawai',20);
             $table->foreign('id_pegawai')
                 ->references('id')
                 ->on('users');
 
-            // $table->integer('id_penghuni');
+            // $table->unsignedInteger('id_penghuni');
             // $table->foreign('id_penghuni')
             //     ->references('id')
             //     ->on('penghuni');
@@ -33,6 +33,7 @@ class CreateMcuCekObatTable extends Migration
             $table->float('dosis',5,2);
             $table->enum('dikonsumi', ['diminum', 'tidak diminum', 'jatuh']);
             $table->datetime('waktu');
+            $table->integer('deleted')->unsigned()->nullable()->default(0);
 
             // $table->timestamps();
         });

@@ -14,7 +14,7 @@ class RelationIdPemberianObat extends Migration
     public function up()
     {
         Schema::table('mcu_cek_obat', function (Blueprint $table) {
-            $table->integer('id_pemberian_obat')
+            $table->unsignedInteger('id_pemberian_obat')
                 ->after('id');
             $table->foreign('id_pemberian_obat')
                 ->references('id')

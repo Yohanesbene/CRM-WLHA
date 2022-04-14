@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class RoleUserSeeder extends Seeder
 {
@@ -15,13 +16,17 @@ class RoleUserSeeder extends Seeder
     public function run()
     {
         //
+        if (Schema::hasTable('role_users')) {
+            DB::table('role_users')->truncate();
+        }
+
         DB::table('role_users')->insert([
-           [
-               'id' => 1,
+            [
+                'id' => 1,
                 'keterangan' => 'admin',
                 'kode' => 'ADM'
-           ],
-           [
+            ],
+            [
                 'id' => 2,
                 'keterangan' => 'Manajer (Report Reader)',
                 'kode' => 'MAN'

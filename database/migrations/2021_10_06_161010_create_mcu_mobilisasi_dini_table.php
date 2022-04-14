@@ -15,13 +15,13 @@ class CreateMcuMobilisasiDiniTable extends Migration
     {
         Schema::create('mcu_mobilisasi_dini', function (Blueprint $table) {
             // $table->id();
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->string('id_pegawai',20);
             $table->foreign('id_pegawai')
                 ->references('id')
                 ->on('users');
 
-            $table->integer('id_penghuni');
+            $table->unsignedInteger('id_penghuni');
             $table->foreign('id_penghuni')
                 ->references('id')
                 ->on('penghuni');
@@ -29,6 +29,8 @@ class CreateMcuMobilisasiDiniTable extends Migration
             $table->text('hasil');
             $table->datetime('waktu');
             // $table->timestamps();
+            $table->integer('deleted')->unsigned()->nullable()->default(0);
+
         });
     }
 
