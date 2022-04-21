@@ -17,21 +17,19 @@ class CreatePenghuniTable extends Migration
             // $table->id();
             // $table->string('id',)->primary();
             $table->increments('id');
-            $table->unsignedInteger('id_penanggung_jawab');
-            $table->foreign('id_penanggung_jawab')
-            ->references('id')
-            ->on('penanggung_jawab')
-            ;
             $table->string('no_induk', 40);
             $table->unique(['no_induk', 'id']);
             $table->string('nama');
-            $table->string('nickname');
             $table->string('foto')->nullable();
             $table->date('tgl_lahir');
             $table->enum('gender',['pria', 'wanita']);
+            $table->string('penanggung_jawab');
             $table->string('agama', 50);
             $table->string('alamat');
             $table->string('notelp');
+            $table->string('kontak_darurat');
+            $table->string('notelp_darurat');
+            $table->string('riwayat_sakit')->nullable();
             $table->string('asal_daerah');
             $table->string('ruang');
             $table->date('tgl_masuk');

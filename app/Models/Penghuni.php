@@ -10,23 +10,22 @@ class Penghuni extends Model
     use HasFactory;
     protected $table = 'penghuni';
 
-    public static function daftar_penghuni($query)
-    {   
-        $q = explode("/", $query);
-        $data;
-        if(count($q) == 4){
-            $data = Penghuni::where('id', $q[3])
-            ->paginate(10);   
+    public static function daftar_penghuni($query = "")
+    {
+        // $q = explode("/", $query);
+        // $data;
+        if ($query == "") {
+            $data = Penghuni::get();
         } else {
             $data = Penghuni::where('nama', 'like', "%" . $query . "%")
-            ->orWhere('id', 'like', "%" . $query . "%")
-            ->orWhere('nickname', 'like', "%" . $query . "%")
-            ->orWhere('no_induk', 'like', "%" . $query . "%")
-            ->paginate(10);
+                ->orWhere('id', 'like', "%" . $query . "%")
+                ->orWhere('nickname', 'like', "%" . $query . "%")
+                ->orWhere('no_induk', 'like', "%" . $query . "%")
+                ->get();
         }
 
-        if($data->count() == 0){
-            $data = Penghuni::paginate(10);
+        if ($data->count() == 0) {
+            $data = Penghuni::get();
         }
 
         return $data;
@@ -36,5 +35,13 @@ class Penghuni extends Model
     {
         $data = Penghuni::where('id', $id);
         return $data->first();
+    }
+
+    public static function simpan($id, $data){
+        Penghuni::where('id', $id)->update($data);
+    }
+
+    public static function tambah($data){
+        Penghuni::insert($data);
     }
 }

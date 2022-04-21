@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HistoryObatSeeder::class);
         $this->call(PenanggungJawabSeeder::class);
         $this->call(PenghuniSeeder::class);
+        $this->call(McuSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

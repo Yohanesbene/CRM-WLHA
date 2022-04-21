@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMcuPemberianObatTable extends Migration
+class CreatePemberianObat extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,6 @@ class CreateMcuPemberianObatTable extends Migration
     public function up()
     {
         Schema::create('mcu_pemberian_obat', function (Blueprint $table) {
-            // $table->id();
             $table->increments('id');
             $table->string('id_pegawai',20);
             $table->foreign('id_pegawai')
@@ -26,22 +25,22 @@ class CreateMcuPemberianObatTable extends Migration
                 ->references('id')
                 ->on('penghuni');
 
-            // $table->string('id_obat');
-            // $table->foreign('id_obat')
-            //     ->references('id')
-            //     ->on('obat');
+            $table->unsignedInteger('id_obat');
+            $table->foreign('id_obat')
+                ->references('id')
+                ->on('tb_obat');
 
-            // $table->float('dosis',5,2);
-            // $table->integer('id_cek_obat');
-            // $table->foreign('id_cek_obat')
-            //     ->references('id')
-            //     ->on('cek_obat');
-
-            $table->text('efek_samping');
-            $table->datetime('waktu');
+            $table->float('dosis',5,2);
+            $table->datetime('waktu')->nullable();
+            $table->string('id_pegawai_cek', 20)->nullable();
+            $table->foreign('id_pegawai_cek')
+                ->references('id')
+                ->on('users');
+                
+            $table->datetime('waktu_cek')->nullable();
+            $table->string('efek_samping')->nullable();
+            $table->enum('dikonsumsi', ['diminum', 'tidak diminum', 'jatuh', null])->nullable();
             $table->integer('deleted')->unsigned()->nullable()->default(0);
-
-            // $table->timestamps();
         });
     }
 

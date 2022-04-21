@@ -114,14 +114,14 @@
                     </div>
                     <div class="mb-1 col-span-2">
                         <span class="block font-medium text-lg text-gray-900 dark:text-gray-300">
-                            Makan
+                            Nutrisi
                         </span>
                     </div>
                     <div class="mb-6">
-                        <label for="makan_pagi" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
+                        <label for="nutrisi_pagi" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
                             Pagi
                         </label>
-                        <select id="makan_pagi" name="makan_pagi"
+                        <select id="nutrisi_pagi" name="nutrisi_pagi"
                             class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" selected>Pilih Salah Satu</option>
                             @for ($i = 0.25; $i < 1.1; $i = $i + 0.25)
@@ -130,10 +130,10 @@
                         </select>
                     </div>
                     <div class="mb-6">
-                        <label for="makan_siang" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
+                        <label for="nutrisi_siang" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
                             Siang
                         </label>
-                        <select id="makan_siang" name="makan_siang"
+                        <select id="nutrisi_siang" name="nutrisi_siang"
                             class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" selected>Pilih Salah Satu</option>
                             @for ($i = 0.25; $i < 1.1; $i = $i + 0.25)
@@ -142,10 +142,10 @@
                         </select>
                     </div>
                     <div class="mb-6">
-                        <label for="makan_sore" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
+                        <label for="nutrisi_sore" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
                             Sore
                         </label>
-                        <select id="makan_sore" name="makan_sore"
+                        <select id="nutrisi_sore" name="nutrisi_sore"
                             class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" selected>Pilih Salah Satu</option>
                             @for ($i = 0.25; $i < 1.1; $i = $i + 0.25)
@@ -158,14 +158,14 @@
                     </div>
                     <div class="mb-1 col-span-2">
                         <span class="block font-medium text-lg text-gray-900 dark:text-gray-300">
-                            Minum
+                            Cairan
                         </span>
                     </div>
                     <div class="mb-6">
-                        <label for="minum_pagi" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
+                        <label for="cairan_pagi" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
                             Pagi
                         </label>
-                        <select id="minum_pagi" name="minum_pagi"
+                        <select id="cairan_pagi" name="cairan_pagi"
                             class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" selected>Pilih Salah Satu</option>
                             @for ($i = 100; $i < 1001; $i = $i + 100)
@@ -174,10 +174,10 @@
                         </select>
                     </div>
                     <div class="mb-6">
-                        <label for="minum_siang" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
+                        <label for="cairan_siang" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
                             Siang
                         </label>
-                        <select id="minum_siang" name="minum_siang"
+                        <select id="cairan_siang" name="cairan_siang"
                             class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" selected>Pilih Salah Satu</option>
                             @for ($i = 100; $i < 1001; $i = $i + 100)
@@ -186,10 +186,10 @@
                         </select>
                     </div>
                     <div class="mb-6">
-                        <label for="minum_sore" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
+                        <label for="cairan_sore" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
                             Sore
                         </label>
-                        <select id="minum_sore" name="minum_sore"
+                        <select id="cairan_sore" name="cairan_sore"
                             class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" selected>Pilih Salah Satu</option>
                             @for ($i = 100; $i < 1001; $i = $i + 100)

@@ -22,6 +22,13 @@ class User extends Model
         return $detail;
     }
 
+    public function get_user_detail($id){
+        $detail = DB::table('users')
+        ->where('users.id', '=', $id)
+        ->first();
+        return $detail;
+    }
+
     public function get_user(){
         $user = DB::table('users')
         ->join('role_users', 'users.id_level', '=', 'role_users.id')
@@ -68,7 +75,11 @@ class User extends Model
         // $return['error_tambah']['status_kepegawaian'] = $data->status_kepegawaian;
         // $return['error_tambah']['pelatihan'] = $data->pelatihan;
 
-        $extension = $data->file('foto')->getClientOriginalExtension();
+        if($data->file('foto')) {
+            $extension = $data->file('foto')->getClientOriginalExtension();
+        } else {
+            $extension = '';
+        }
 
         if($return['error_tambah'] == null ){
             $tgl_masuk = $data->mulaimasuk;
@@ -79,7 +90,11 @@ class User extends Model
             $check_id = DB::table('users')->where('id', 'like', $role.'%')->latest('id')->first('id');
             if($check_id == null){
                 // dd($check_id);
-
+                if($data->file('foto')) {
+                    $nama_foto = $role . '-' . $tgl_masuk . '-001' . '.' . $extension;
+                } else {
+                    $nama_foto = null;
+                }
                 DB::table('users')->insert([
                     'id' => $role . '-' . $tgl_masuk . '-001',
                     'username' => $data->username,
@@ -88,7 +103,7 @@ class User extends Model
                     'password' => Hash::make($data->password),
                     'nama' => $data->nama,
                     'nik' => $data->nik,
-                    'foto' => $role . '-' . $tgl_masuk . '-001' . '.' . $extension,
+                    'foto' => $nama_foto,
                     'tgl_lahir' => $data->tgl_lahir,
                     'gender' => $data->gender,
                     'agama' => $data->agama,
@@ -102,7 +117,9 @@ class User extends Model
                 ]);
 
                 $fileNameToStore = $role . '-' . $tgl_masuk . '-001' . '.' . $extension;
-                $path = $data->file('foto')->storeAs('public/photo',$fileNameToStore);
+                if($data->file('foto')) {
+                    $path = $data->file('foto')->storeAs('public/photo',$fileNameToStore);
+                }
                 return $return;
             } else {
                 $last_id = DB::table('users')->where('id', 'like', $role.'%')->latest()->first();
@@ -145,22 +162,19 @@ class User extends Model
         }
     }
 
-    public function get_ganti_password(){
-        $username = DB::table('users')
-        ->select('id','username','nik')
-        ->get()
-        ->toArray();
-        return $username;
+    public function get_ganti_password($id){
+        $data = DB::table('users')
+        ->select('id','username', 'nama')
+        ->where('id', $id)
+        ->first();
+        return $data;
     }
 
     public function ganti_password($data){
 
         $return['error_ubahpassword'] = null;
-        $check_id = DB::table('users')
-            ->where('id', $data->id)
-            ->get();
 
-        if(count($check_id) > 0){
+        if(DB::table('users')->where('id', $data->id)->exists()){
             DB::table('users')
             ->where('id', $data->id)
             ->update(['password' => Hash::make($data->password)]);
@@ -173,6 +187,19 @@ class User extends Model
     }
 
     public function edit($data){
+        $return['error_update'] = null;
+        if(DB::table('users')->where('id', $data['id'])->exists()){
+            $update = DB::table('users')
+                ->where('id', $data['id'])
+                ->update($data);
+        } else {
+            $return['error_update'] == 'Tidak Berhasil';
+        }
+
+        return $return;
+    }
+
+    public function edit1($data){
         $return['error_update'] = null;
 
         $user = DB::table('users')

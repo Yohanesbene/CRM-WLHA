@@ -1,4 +1,4 @@
-<x-app-admin-layout>
+<x-app-layout>
 
     {{-- ADMIN DASHBOARD <br>
     YANG LOGIN SIAPA ? <br>
@@ -6,8 +6,8 @@
     {{ Session::get('auth_wlha')->pluck('id')[0] }} <br>
     -------------------------------------------------------------------------------------------------<br>
 
-    <button type="button"><a  href="{{route('admin.pegawai.tambah')}}">Tambah Pegawai</a></button>
-    <button type="button"><a  href="{{route('admin.pegawai.ubahpassword')}}">Ubah Password</a></button>
+    <button type="button"><a  href="{{route('pegawai.tambah')}}">Tambah Pegawai</a></button>
+    <button type="button"><a  href="{{route('pegawai.ubahpassword')}}">Ubah Password</a></button>
     <button type="button"><a  href="{{route('auth.logout')}}">Logout</a></button>
     <div>
         @if (Session::has('message_success'))
@@ -17,8 +17,8 @@
         @endif
     </div> --}}
 
-    <div class="flex h-screen"
-        x-data="{ modalAddUser: false, modalDetailUser: false,modalEditUser: false, modalGantiPassword: false }"
+    <div class="flex h-full w-full"
+        x-data="{ modalAddUser: false, modalDetailUser: false, modalEditUser: false, modalGantiPassword: false }"
         :class="{'overflow-y-hidden': modalAddUser || modalDetailUser || modalEditUser || modalGantiPassword}">
         <div class="flex-auto bg-indigo-50 py-6 px-10">
             <div>
@@ -148,7 +148,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('admin.pegawai.prosestambah') }}"
+                    <form method="POST" action="{{ route('pegawai.prosestambah') }}"
                         enctype="multipart/form-data">
                         @csrf
 
@@ -339,7 +339,7 @@
                             <button
                                 class="text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200"
                                 @click="modalAddUser = false">
-                                <a href="{{ route('admin.kepegawaian') }}">Batal</a>
+                                <a href="{{ route('pegawai.index') }}">Batal</a>
                             </button>
                         </p>
 
@@ -457,7 +457,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form id="formEdit" action="{{ route('admin.pegawai.prosesedit') }}" method="POST"
+                    <form id="formEdit" action="{{ route('pegawai.prosesedit') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <x-input type="hidden" id="editIdPassword" name="id" />
@@ -649,7 +649,7 @@
                             <button
                                 class="text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200"
                                 @click="modalEditUser = false">
-                                <a href="{{ route('admin.kepegawaian') }}">Batal</a>
+                                <a href="{{ route('pegawai.index') }}">Batal</a>
                             </button>
                         </p>
 
@@ -717,7 +717,7 @@
                             <button
                                 class="text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200"
                                 @click="modalGantiPassword = false">
-                                <a href="{{ route('admin.kepegawaian') }}">Batal</a>
+                                <a href="{{ route('pegawai.index') }}">Batal</a>
                             </button>
                         </p>
 
@@ -736,7 +736,7 @@
             $(document).on('click', '#details', function() {
                 id = $(this).data('id');
                 $.ajax({
-                    url: "{{ route('admin.pegawai.detail') }}",
+                    url: "{{ route('pegawai.detail') }}",
                     method: "POST",
                     data: {
                         '_token': '{{ csrf_token() }}',
@@ -786,7 +786,7 @@
                 password_confirmation = $('#updatePassword_confirmation').val();
 
                 $.ajax({
-                    url: "{{ route('admin.pegawai.prosesubahpassword') }}",
+                    url: "{{ route('pegawai.prosesubahpassword') }}",
                     method: "POST",
                     data: {
                         '_token': '{{ csrf_token() }}',
@@ -795,7 +795,7 @@
                         password_confirmation: password_confirmation
                     },
                     success: function(data) {
-                        window.location.replace("{{ route('admin.kepegawaian') }}");
+                        window.location.replace("{{ route('pegawai.index') }}");
                     },
                     error: function(data) {}
                 });
@@ -807,7 +807,7 @@
                 $('#editIdPassword').val($(this).data('id'));
 
                 $.ajax({
-                    url: "{{ route('admin.pegawai.edit.get') }}",
+                    url: "{{ route('pegawai.edit.get') }}",
                     method: "POST",
                     data: {
                         '_token': '{{ csrf_token() }}',
@@ -855,7 +855,7 @@
                         } else {
                             $("#editPreviewImg").attr("src",
                                 "https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
-                                );
+                            );
                         }
 
                         if ($user["status"] == 1) {
@@ -879,7 +879,7 @@
 
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('admin.pegawai.prosesedit') }}",
+                    url: "{{ route('pegawai.prosesedit') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -887,7 +887,7 @@
                     success: function(data) {
 
                         console.log(data);
-                        window.location.replace("{{ route('admin.kepegawaian') }}");
+                        window.location.replace("{{ route('pegawai.index') }}");
                     },
 
                     error: function(data) {
@@ -922,4 +922,4 @@
         }
     </script>
 
-</x-app-admin-layout>
+</x-app-layout>

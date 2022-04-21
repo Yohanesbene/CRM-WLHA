@@ -32,9 +32,9 @@ class AuthController extends Controller
             if ($login->pluck('status')[0] == "1") {
                 session()->put('auth_wlha', $login);
                 if ($login->pluck('id_level')[0] == 1) {
-                    return redirect('/admin/kepegawaian');
+                    return redirect('/pegawai');
                 } else {
-                    return redirect('/user/rekammedis');
+                    return redirect('/rekmed');
                 }
             } else {
                 return redirect('/')->with('login_error', 'Akun anda tidak aktif, segera hubungi admin');

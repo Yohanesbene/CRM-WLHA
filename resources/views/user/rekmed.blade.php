@@ -1,12 +1,12 @@
-<x-app-user-layout>
+<x-app-layout>
     {{-- ADMIN DASHBOARD <br>
     YANG LOGIN SIAPA ? <br>
     -------------------------------------------------------------------------------------------------<br>
     {{ Session::get('auth_wlha')->pluck('id')[0] }} <br>
     -------------------------------------------------------------------------------------------------<br>
 
-    <button type="button"><a  href="{{route('admin.pegawai.tambah')}}">Tambah Pegawai</a></button>
-    <button type="button"><a  href="{{route('admin.pegawai.ubahpassword')}}">Ubah Password</a></button>
+    <button type="button"><a  href="{{route('pegawai.tambah')}}">Tambah Pegawai</a></button>
+    <button type="button"><a  href="{{route('pegawai.ubahpassword')}}">Ubah Password</a></button>
     <button type="button"><a  href="{{route('auth.logout')}}">Logout</a></button>
     <div>
         @if (Session::has('message_success'))
@@ -64,6 +64,12 @@
 
             var timer;
 
+            $(document).on('click', '.paginator', function(event) {
+                event.preventDefault();
+                var query = $(this).attr("href");
+                fetch_data(query);
+            });
+
             $(document).on('keyup', '#searchPenghuni', function() {
                 clearTimeout(timer);
                 timer = setTimeout(function() {
@@ -78,4 +84,4 @@
 
 
 
-</x-app-user-layout>
+</x-app-layout>
