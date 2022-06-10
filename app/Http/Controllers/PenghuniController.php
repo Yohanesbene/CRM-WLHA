@@ -22,8 +22,63 @@ class PenghuniController extends Controller
 
     public function penghuni()
     {
-        $data['user'] = $this->Penghuni->daftar_penghuni();
-        return view('penghuni.index')->with($data);
+        // $data['user'] = $this->Penghuni->daftar_penghuni();
+        return view('penghuni.index');
+    }
+
+    public function data_penghuni(Request $request)
+    {
+        $columns = array(
+            0 => 'id',
+            1 => 'nama',
+            2 => 'tgl_lahir',
+            3 => 'ruang',
+            4 => 'status',
+            5 => 'action'
+        );
+
+        $totalData = Penghuni::count();
+        $totalFiltered = $totalData;
+        $limit = $request->input('length');
+
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        if(empty($request->input('search.value')))
+        {
+            $penghuni = $this->Penghuni->daftar_penghuni('', $start, $limit, $order, $dir);
+        }
+        else
+        {
+            $search = $request->input('search.value');
+            $penghuni = $this->Penghuni->daftar_penghuni($search, $start, $limit, $order, $dir);
+        }
+        $data = array();
+
+        foreach ($penghuni as $key => $p) {
+            $row['id'] = $start+$key+1;
+            $row['nama'] = $p->nama;
+            $row['tgl_lahir'] = $p->tgl_lahir;
+            $row['ruang'] = $p->ruang;
+            $row['status'] = $p->meninggal == 0 || $p->keluar == 0 ?
+                    '<span class="bg-green-200 text-green-700 font-semibold py-1 px-3 rounded-full text-sm">Active</span>' :
+                    '<span class="bg-red-200 text-red-700 font-semibold py-1 px-3 rounded-full text-sm">Inactive</span>';
+            $row['action'] =
+                    '<button class="text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200" @click="modalDetailUser = true" id="details" data-id="'. $p->id .'">Details</button>
+                    &nbsp;
+                    <a href="'. route('penghuni.ubah', [$p->id]) .'" class="text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200" id="edit" data-id="'. $p->id .'">Edit</a>';
+            $data[] = $row;
+        }
+
+        $json_data = array(
+        "draw"            => intval($request->input('draw')),
+        "recordsTotal"    => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data"            => $data
+        );
+
+        echo json_encode($json_data);
     }
 
     public function tambahPenghuni()

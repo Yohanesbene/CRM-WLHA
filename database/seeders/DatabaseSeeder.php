@@ -20,12 +20,13 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $this->call(UserSeeder::class);
         $this->call(RoleUserSeeder::class);
-        
+
         $this->call(ObatSeeder::class);
         $this->call(HistoryObatSeeder::class);
         $this->call(PenanggungJawabSeeder::class);
         $this->call(PenghuniSeeder::class);
         $this->call(McuSeeder::class);
+        $this->call(MobilitasSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

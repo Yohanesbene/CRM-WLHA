@@ -1,1 +1,12 @@
-// require('./bootstrap');
+require('./bootstrap');
+require("jquery");
+require("pdfmake");
+require( 'datatables.net-dt' );
+require( 'datatables.net-buttons-dt' );
+require( 'datatables.net-buttons/js/buttons.html5.js' );
+require( 'datatables.net-buttons/js/buttons.print.js' );
+require( 'datatables.net-datetime' );
+require( 'datatables.net-fixedheader-dt' );
+require( 'datatables.net-responsive-dt' );
+require( 'datatables.net-searchpanes-dt' );
+require( 'datatables.net-select-dt' );

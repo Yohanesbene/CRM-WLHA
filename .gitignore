@@ -15,3 +15,4 @@ yarn-error.log
 .env
 server_start.bat
 public/photos
+server_mix_watch.bat

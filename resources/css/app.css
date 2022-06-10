@@ -1,8 +1,61 @@
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 /* import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities"; */
+
+
+@import './../../node_modules/datatables.net-fixedheader-dt/css/fixedHeader.dataTables.min.css';
+@import './../../node_modules/datatables.net-responsive-dt/css/responsive.dataTables.min.css';
+@import './../../node_modules/datatables.net-searchpanes-dt/css/searchPanes.dataTables.min.css';
+@import "./../../node_modules/select2/dist/css/select2.css";
+@import './../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css';
+@import './../../node_modules/datatables.net-buttons-dt/css/buttons.dataTables.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+tbody tr{
+    @apply text-lg;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    @apply flex justify-start w-full items-center;
+}
+
+.select2-container
+{
+    @apply w-full !important;
+}
+
+.select2-container .selection .select2-selection{
+  @apply flex items-center h-auto text-lg w-full px-3 py-2 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 mb-4 !important;
+  }
+
+.select2-container .selection .select2-selection .select2-selection__rendered{
+  @apply text-lg !important;
+  }
+
+.select2-container .selection .select2-selection .select2-selection__arrow{
+    @apply relative ml-auto !important;
+}
+
+/*.dataTables_wrapper .dataTables_paginate span .paginate_button {
+    @apply align-middle bg-indigo-400 rounded-lg text-white border-0 bg-none h-11 hover:bg-indigo-600 active:bg-indigo-600 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate span .paginate_button.current {
+    @apply p-5 text-white align-middle border-2 border-indigo-600 bg-indigo-500 hover:bg-indigo-500 hover:text-white !important;
+}
+
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.previous,
+.dataTables_wrapper .dataTables_paginate a.paginate_button.next{
+    @apply bg-indigo-400 rounded-lg text-white border-0 bg-none h-11 hover:bg-indigo-600 active:bg-indigo-600 !important;
+ }
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.previous.disabled,
+.dataTables_wrapper .dataTables_paginate a.paginate_button.next.disabled{
+    @apply bg-white rounded-lg text-indigo-500 border-0 bg-none hover:bg-white active:bg-white !important;
+} */

@@ -17,7 +17,7 @@ class ObatController extends Controller
     public function index()
     {
         // $query = $request->get('query');
-        $data['data'] = Obat::daftar_obat();
+        $data['data'] = Obat::daftar_obat('', 0, 10, 'id', 'asc');
         $data['count'] = $data['data']->count();
         $data['query'] = '';
         return view('listobat/index', $data);

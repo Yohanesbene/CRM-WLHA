@@ -58,4 +58,57 @@ class HistoryObat extends Model
             ->orderBy('tb_history_obat.updated_at', 'desc')
             ->paginate(7);
     }
+
+    public static function stok_obat($id)
+    {
+        $data = HistoryObat::where('id_obat', $id)
+            ->sum('stokobat');
+
+        return $data;
+    }
+
+    public static function histori($query, $id_obat, $start, $limit, $order, $dir)
+    {
+        if($query != '')
+        {
+            $data = HistoryObat::where('id_obat', $id_obat)
+                ->where('keterangan', 'like', "%" . $query . "%")
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order,$dir)
+                ->get();
+        } else {
+            $data = HistoryObat::where('id_obat', $id_obat)
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order,$dir)
+                ->get();
+        }
+
+        return $data;
+    }
+
+    public static function detail_histori($id_history)
+    {
+        $data = HistoryObat::where('id', $id_history)->first();
+        return $data;
+    }
+
+    public static function histori_count($query, $id_obat)
+    {
+        if($query != '')
+        {
+            $data = DB::table('tb_history_obat')
+                ->selectRaw('count(id_obat) as total')
+                ->where('id_obat', $id_obat)
+                ->where('keterangan', 'like', "%".$query."%")
+                ->first();
+        }else{
+            $data = DB::table('tb_history_obat')
+                ->selectRaw('count(id_obat) as total')
+                ->where('id_obat', $id_obat)
+                ->first();
+        }
+        return $data;
+    }
 }

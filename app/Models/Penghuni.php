@@ -10,23 +10,27 @@ class Penghuni extends Model
     use HasFactory;
     protected $table = 'penghuni';
 
-    public static function daftar_penghuni($query = "")
+    public static function daftar_penghuni($query = "", $start, $limit, $order, $dir)
     {
         // $q = explode("/", $query);
         // $data;
         if ($query == "") {
-            $data = Penghuni::get();
+            $data = Penghuni::offset($start)
+                        ->limit($limit)
+                        ->orderBy($order,$dir)
+                        ->get();
         } else {
             $data = Penghuni::where('nama', 'like', "%" . $query . "%")
                 ->orWhere('id', 'like', "%" . $query . "%")
-                ->orWhere('nickname', 'like', "%" . $query . "%")
                 ->orWhere('no_induk', 'like', "%" . $query . "%")
+                ->orWhere('ruang', 'like', "%" . $query . "%")
+                ->orWhere('tgl_lahir', 'like', "%" . $query . "%")
                 ->get();
         }
 
-        if ($data->count() == 0) {
-            $data = Penghuni::get();
-        }
+        // if ($data->count() == 0) {
+        //     $data = Penghuni::get();
+        // }
 
         return $data;
     }

@@ -1,6 +1,22 @@
-<p class="text-2xl font-bold">{{ ucwords(str_replace('_', ' ', $key)) }} ( {!! $satuan[$key] !!} )</p>
+<div class="flex mb-4 justify-between w-full">
+    <p class="text-2xl font-bold mb-3">{{ ucwords(str_replace('_', ' ', $key)) }} ( {!! $satuan[$key] !!} )</p>
+    <div>Search : <input
+            type="text" name="search" id="search"
+            class="z-10 border border-indigo-200 rounded-lg p-3 text-lg">
+    </div>
+</div>
 <div class="mb-4 max-w-full overflow-x-auto">
-    @php
+    <table id="table-data" class="min-w-full display cell-border">
+        <thead class="bg-gray-50">
+            <tr class="text-black uppercase text-base leading-normal">
+                <th class="text-left py-3 px-6 font-semibold">ID Pegawai</th>
+                <th class="text-left py-3 px-6 font-semibold">Hasil</th>
+                <th class="text-left py-3 px-6 font-semibold">Waktu</th>
+                <th class="text-left py-3 px-6 font-semibold">Action</th>
+            </tr>
+        </thead>
+    </table>
+    {{-- @php
         $data_key = array_keys((array) $data[0]);
     @endphp
     <table class="table-auto min-w-full mt-4 ">
@@ -32,6 +48,6 @@
                 </tr>
             @endforeach
         </tbody>
-    </table>
+    </table> --}}
 </div>
 {{ $data->onEachSide(2)->withPath($page_url)->links('pagination::tailwind_detail_medis') }}

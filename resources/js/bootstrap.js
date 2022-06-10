@@ -6,10 +6,16 @@ window._ = require('lodash');
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+window.$ = window.jQuery = require('jquery');
+require("select2");
+$('select').select2();
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+
+// Datatables
+// window.DataTable = require('datatables.net-dt');
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

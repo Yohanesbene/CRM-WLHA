@@ -36,15 +36,33 @@ class Obat extends Model
         return $data;
     }
 
-    public static function daftar_obat($query = NULL)
+    public static function daftar_obat_all()
     {
-        $data = Obat::withSum('historyObat as stokobat', 'stokobat');
-
-        if ($query != NULL) {
-            $data->where('namaobat', 'like', '%' . $query . '%')
-                ->orWhere('kode_slug', 'like', '%' . $query . '%')
-                ->orWhere('id', 'like', '%' . $query . '%');
+        $data = Obat::get(['id', 'kode_slug', 'namaobat']);
+        return $data;
+    }
+    public static function daftar_obat($query = "", $start, $limit, $order, $dir)
+    {
+        if ($query == "") {
+            $data = Obat::offset($start)
+                        ->limit($limit)
+                        ->orderBy($order,$dir)
+                        ->get(['id', 'kode_slug', 'namaobat']);
+        } else {
+            $data = Obat::where('namaobat', 'like', "%" . $query . "%")
+                        ->orWhere('kode_slug', 'like', "%" . $query . "%")
+                        ->offset($start)
+                        ->limit($limit)
+                        ->orderBy($order,$dir)
+                        ->get(['id', 'kode_slug', 'namaobat']);
         }
-        return $data->paginate(7);
+        return $data;
+    }
+
+    public static function detail_obat($id_obat)
+    {
+        $data = Obat::where('id', $id_obat)->first();
+        return $data;
     }
 }
+

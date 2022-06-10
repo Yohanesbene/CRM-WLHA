@@ -1,14 +1,18 @@
 <?php
+namespace App;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FarmasiController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PenghuniController;
+use App\Http\Controllers\MobilitasController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\MedicalCheckController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,14 +69,16 @@ Route::group(['prefix' => 'penghuni', 'as' => 'penghuni.'], function () {
     Route::post('/edit/get', [PenghuniController::class, 'getEditPenghuni'])->name('edit.get');
     Route::post('/ubah/proses', [PenghuniController::class, 'prosesUbahPenghuni'])->name('prosesubah');
     Route::get('/ubah/{id}', [PenghuniController::class, 'ubahPenghuni'])->name('ubah');
+    Route::post('/data', [PenghuniController::class, 'data_penghuni'])->name('data');
 });
 
 Route::group(['prefix' => 'rekmed', 'as' => 'rekmed.'], function () {
     Route::get('/', [RekamMedisController::class, 'penghuni'])->name('index');
+    Route::post('/data', [RekamMedisController::class, 'data_penghuni'])->name('data');
     Route::get('/detail/{id}', [RekamMedisController::class, 'detailMedis'])->name('detail');
 
-    Route::get('detail_medis_data/{id}/{data}', [RekamMedisController::class, 'detail_medis_data'])->name('detail_medis_data');
-    Route::get('detail_medis_table/{id}/{data}', [RekamMedisController::class, 'detail_medis_table'])->name('detail_medis_table');
+    Route::get('detail_medis_data/{id}/{data}', [RekamMedisController::class, 'detail_medis_data'])->name('data_details');
+    Route::get('detail_medis_table/{id}/{data}', [RekamMedisController::class, 'detail_medis_table'])->name('data_details_table');
     Route::get('detail_medis_chart/{id}/{data}/{from_date}/{until_date}', [RekamMedisController::class, 'detail_medis_chart'])->name('detail_medis_chart');
 
     Route::get('hapus_mcu/{id}/{data}/{id_penghuni}', [UserController::class, 'hapus_mcu'])->name('hapus');
@@ -80,14 +86,31 @@ Route::group(['prefix' => 'rekmed', 'as' => 'rekmed.'], function () {
     Route::post('simpan_mcu', [RekamMedisController::class, 'simpan_mcu'])->name('simpan');
 });
 
-Route::group(['prefix' => 'mobilitas', 'as' => 'mobilitas'], function () {
-    Route::get('/', [PenghuniController::class, 'penghuni'])->name('index');
-    Route::post('/tambah/proses', [PenghuniController::class, 'prosesTambahPenghuni'])->name('prosestambah');
-    Route::get('/tambah', [PenghuniController::class, 'tambahPenghuni'])->name('tambah');
-    Route::post('/detail', [PenghuniController::class, 'detailPenghuni'])->name('detail');
-    Route::post('/edit/get', [PenghuniController::class, 'getEditPenghuni'])->name('edit.get');
-    Route::post('/ubah/proses', [PenghuniController::class, 'prosesUbahPenghuni'])->name('prosesubah');
-    Route::get('/ubahpenghuni/{id}', [PenghuniController::class, 'ubahPenghuni'])->name('ubah');
+Route::group(['prefix' => 'mobilitas', 'as' => 'mobilitas.'], function () {
+    Route::get('/', [MobilitasController::class, 'mobilitas'])->name('index');
+    Route::post('/data', [MobilitasController::class, 'dataMobilitas'])->name('data');
+    Route::post('/detail', [MobilitasController::class, 'detailMobilitas'])->name('detail');
+    Route::get('/tambah', [MobilitasController::class, 'tambahMobilitas'])->name('tambah');
+    Route::post('/proses_tambah', [MobilitasController::class, 'prosesTambahMobilitas'])->name('prosestambah');
+    Route::get('/edit/{id}', [MobilitasController::class, 'editMobilitas'])->name('edit');
+    Route::post('/proses_edit', [MobilitasController::class, 'prosesEditMobilitas'])->name('prosesedit');
+    Route::get('/pulang/{id}', [MobilitasController::class, 'pulangMobilitas'])->name('pulang');
+    Route::post('/tambah_pulang', [MobilitasController::class, 'tambahPulangMobilitas'])->name('tambah_pulang');
+
+    // Route::get('/', [MobilitasController::class, 'data_mobilitas_keluar'])->name('data_keluar');
+});
+
+Route::group(['prefix' => 'farmasi', 'as' => 'farmasi.'], function () {
+    Route::get('/', [FarmasiController::class, 'index'])->name('index');
+    Route::post('/data', [FarmasiController::class, 'data'])->name('data');
+    Route::get('/tambah', [FarmasiController::class, 'tambah_obat'])->name('tambah_obat');
+    Route::post('/proses_tambah_obat', [FarmasiController::class, 'proses_tambah_obat'])->name('proses_tambah_obat');
+    Route::get('/transaksi/{id_obat}', [FarmasiController::class, 'transaksi'])->name('transaksi');
+    Route::get('/tambah_transaksi/{id_obat?}', [FarmasiController::class, 'tambah_transaksi'])->name('tambah_transaksi');
+    Route::get('/edit_transaksi/{id_history}', [FarmasiController::class, 'edit_transaksi'])->name('edit_transaksi');
+    Route::post('/transaksi_data', [FarmasiController::class, 'transaksi_data'])->name('transaksi_data');
+
+    // Route::get('/', [MobilitasController::class, 'data_mobilitas_keluar'])->name('data_keluar');
 });
 
 
@@ -122,7 +145,6 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'User'], funct
     Route::post('/penghuni/detail', [UserController::class, 'detailPenghuni'])->name('penghuni.detail');
     Route::post('/penghuni/edit/get', [UserController::class, 'getEditPenghuni'])->name('penghuni.edit.get');
 });
-
 
 // Inventory Obat
 Route::get('/daftar_obat', [ObatController::class, 'index']);
