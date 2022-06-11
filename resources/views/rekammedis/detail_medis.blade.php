@@ -6,7 +6,6 @@
       <div class="flex flex-col gap-3 lg:flex-row">
         <div>
           <div class="h-48 w-48 bg-gray-200">
-
           </div>
         </div>
         <div class="leading-loose">
