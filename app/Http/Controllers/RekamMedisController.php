@@ -97,7 +97,7 @@ class RekamMedisController extends Controller
         foreach (['nadi', 'spo2', 'suhu_badan', 'berat_badan'] as $tb) {
             $data['data'][$tb] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->orderBy('waktu', 'desc')
                 ->limit(10)
                 ->get();
@@ -107,7 +107,7 @@ class RekamMedisController extends Controller
             ->join('tb_obat', 'mcu_pemberian_obat.id_obat', '=', 'tb_obat.id')
             ->select('mcu_pemberian_obat.*', 'tb_obat.namaobat')
             ->where('id_penghuni', $id)
-            ->where('deleted', 0)
+            ->where('mcu_pemberian_obat.deleted', 0)
             ->orderBy('waktu', 'desc')
             ->limit(10)
             ->get();
@@ -123,7 +123,7 @@ class RekamMedisController extends Controller
         foreach (['nutrisi', 'cairan', 'urine', 'bab'] as $tb) {
             $data['data_3'][$tb] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->orderBy('waktu', 'desc')
                 ->limit(10)
                 ->get();
@@ -141,7 +141,7 @@ class RekamMedisController extends Controller
                 ->join('tb_obat', 'mcu_pemberian_obat.id_obat', '=', 'tb_obat.id')
                 ->select('mcu_pemberian_obat.*', 'tb_obat.namaobat')
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->orderBy('waktu', 'desc')
                 ->paginate(10);
         } else {
@@ -160,14 +160,14 @@ class RekamMedisController extends Controller
             $data['chart'] = DB::table('mcu_' . $tb)
                 ->select(DB::raw('id, id_penghuni, id_pegawai, waktu, COALESCE (pagi, siang, sore) AS hasil'))
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->whereBetween('waktu', [$date_prev, $date_next->copy()->addDays(1)])
                 ->orderBy('waktu', 'desc')
                 ->get();
         } else {
             $data['chart'] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->whereBetween('waktu', [$date_prev, $date_next->copy()->addDays(1)])
                 ->orderBy('waktu', 'desc')
                 ->get();
@@ -188,13 +188,13 @@ class RekamMedisController extends Controller
                 ->join('tb_obat', 'mcu_pemberian_obat.id_obat', '=', 'tb_obat.id')
                 ->select('mcu_pemberian_obat.*', 'tb_obat.namaobat')
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->orderBy('waktu', 'desc')
                 ->paginate(10);
         } else {
             $data['data'] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->orderBy('waktu', 'desc')
                 ->paginate(10);
         }
@@ -221,14 +221,14 @@ class RekamMedisController extends Controller
             $data['chart'] = DB::table('mcu_' . $tb)
                 ->select(DB::raw('id, id_penghuni, id_pegawai, waktu, COALESCE (pagi, siang, sore) AS hasil'))
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->whereBetween('waktu', [$date_prev, $date_next->copy()->addDays(1)])
                 ->orderBy('waktu', 'asc')
                 ->get();
         } else {
             $data['chart'] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('deleted', 0)
+                ->where('mcu_' . $tb.'.deleted', 0)
                 ->whereBetween('waktu', [$date_prev, $date_next->copy()->addDays(1)])
                 ->orderBy('waktu', 'asc')
                 ->get();
