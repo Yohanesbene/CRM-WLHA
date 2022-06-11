@@ -31,6 +31,7 @@ class CreateObatsTable extends Migration
             $table->string('keterangan', 255)->default(' ');
             $table->double('harga')->default(0);
             $table->string('namaobat', 255);
+            $table->integer('deleted')->default(0);
 
             $table->unique(['kode_1', 'kode_2', 'kode_3', 'kode_4', 'kode_5', 'kode_6', 'kode_7', 'kode_8', 'kode_9'], 'unique_kode');
         });

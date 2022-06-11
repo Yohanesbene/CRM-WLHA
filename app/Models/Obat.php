@@ -41,16 +41,22 @@ class Obat extends Model
         $data = Obat::get(['id', 'kode_slug', 'namaobat']);
         return $data;
     }
+
     public static function daftar_obat($query = "", $start, $limit, $order, $dir)
     {
         if ($query == "") {
             $data = Obat::offset($start)
+                        ->where('deleted', 0)
                         ->limit($limit)
                         ->orderBy($order,$dir)
                         ->get(['id', 'kode_slug', 'namaobat']);
         } else {
-            $data = Obat::where('namaobat', 'like', "%" . $query . "%")
-                        ->orWhere('kode_slug', 'like', "%" . $query . "%")
+            $data = Obat::where('deleted', 0)
+                        ->where(function($q) use ($query)
+                        {
+                            $q->where('namaobat', 'like', "%" . $query . "%")
+                                ->orWhere('kode_slug', 'like', "%" . $query . "%");
+                        })
                         ->offset($start)
                         ->limit($limit)
                         ->orderBy($order,$dir)
@@ -59,10 +65,33 @@ class Obat extends Model
         return $data;
     }
 
+    public static function total_daftar_obat($query = "")
+    {
+        if ($query == "") {
+            $data = Obat::offset($start)
+                        ->where('deleted', 0)
+                        ->count();
+        } else {
+            $data = Obat::where('deleted', 0)
+                        ->where(function($q) use ($query)
+                        {
+                            $q->where('namaobat', 'like', "%" . $query . "%")
+                                ->orWhere('kode_slug', 'like', "%" . $query . "%");
+                        })
+                        ->count();
+        }
+        return $data;
+    }
+
     public static function detail_obat($id_obat)
     {
         $data = Obat::where('id', $id_obat)->first();
         return $data;
+    }
+
+    public static function delete_obat($id_obat)
+    {
+        Obat::where('id', $id_obat)->update(['deleted'=>1]);
     }
 }
 

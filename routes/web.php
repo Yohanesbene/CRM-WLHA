@@ -104,6 +104,9 @@ Route::group(['prefix' => 'farmasi', 'as' => 'farmasi.'], function () {
     Route::get('/', [FarmasiController::class, 'index'])->name('index');
     Route::post('/data', [FarmasiController::class, 'data'])->name('data');
     Route::get('/tambah', [FarmasiController::class, 'tambah_obat'])->name('tambah_obat');
+    Route::post('/hapus', [FarmasiController::class, 'hapus_obat'])->name('hapus_obat');
+    Route::post('/konfirm_hapus', [FarmasiController::class, 'konfirmasi_hapus_obat'])->name('konfirmasi_hapus_obat');
+    Route::post('/proses_hapus', [FarmasiController::class, 'proses_hapus_obat'])->name('proses_hapus_obat');
     Route::post('/proses_tambah_obat', [FarmasiController::class, 'proses_tambah_obat'])->name('proses_tambah_obat');
     Route::get('/transaksi/{id_obat}', [FarmasiController::class, 'transaksi'])->name('transaksi');
     Route::get('/tambah_transaksi/{id_obat?}', [FarmasiController::class, 'tambah_transaksi'])->name('tambah_transaksi');

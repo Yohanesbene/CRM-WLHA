@@ -183,6 +183,7 @@ class ObatSeeder extends Seeder
                 $data[$i]['kode_' . $j] = ${'k' . $j};
             }
             $data[$i]['kode_slug'] = "$k1$k2$k3$k4$k5$k6$k7$k8$k9";
+            $data[$i]['deleted'] = 0;
         }
 
         // print_r($data);

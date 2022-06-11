@@ -31,12 +31,12 @@ class FarmasiController extends Controller
     {
         $columns = array(
             0 => 'id',
-            1 => 'nama_obat',
+            1 => 'namaobat',
             2 => 'stock',
             3 => 'action',
         );
 
-        $totalData = Obat::count();
+        $totalData = Obat::where('deleted', 0)->count();
         $totalFiltered = $totalData;
         $limit = $request->input('length');
 
@@ -52,8 +52,8 @@ class FarmasiController extends Controller
         {
             $search = $request->input('search.value');
             $obat = $this->Obat->daftar_obat($search, $start, $limit, $order, $dir);
-            $totalData = $obat->count();
-            $totalFiltered = $totalData;
+            $totalFiltered = $this->Obat->total_daftar_obat($search);
+            $totalData = $totalFiltered;
         }
         $data = array();
 
@@ -63,11 +63,13 @@ class FarmasiController extends Controller
             $row['nama_kode_obat'] = "$p->namaobat<br><span class='italic'>$p->kode_slug</span>";
             $row['stock'] = $this->HistoryObat->stok_obat($p->id);
             $row['action'] =
-                    '<a href="'. route('farmasi.transaksi', [$p->id]).'" class="text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200" id="details" data-id="'. $p->id .'">Detail</button>
+                    '<a href="'. route('farmasi.transaksi', [$p->id]).'" class="text-indigo-400 font-medium text-lg hover:border-b-2 hover:border-indigo-900 hover:pb-1 hover:text-indigo-900 transition duration-200" id="details" data-id="'. $p->id .'">Detail</a>
                     &nbsp;
-                    <a href="'. route('mobilitas.edit', [$p->id]) .'" class="text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200" id="edit" data-id="'. $p->id .'">Edit</a>
+                    <a href="'. route('mobilitas.edit', [$p->id]) .'" class="text-indigo-400 font-medium text-lg hover:border-b-2 hover:border-indigo-900 hover:pb-1 hover:text-indigo-900 transition duration-200" id="edit" data-id="'. $p->id .'">Edit</a>
                     &nbsp;
-                    <a href="'. route('penghuni.ubah', [$p->id]) .'" class="text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200" id="edit" data-id="'. $p->id .'">Hapus</a>
+                    <a href="'. route('farmasi.tambah_transaksi', ['id_obat' => $p->id]) .'" class="text-indigo-400 font-medium text-lg hover:border-b-2 hover:border-indigo-900 hover:pb-1 hover:text-indigo-900 transition duration-200" id="tambahTransaksi" data-id="'. $p->id .'">+ Transaksi</a>
+                    &nbsp;
+                    <a href="#" @click="modalKonfirmasiDelete = true; nama_obat = \''. $p->namaobat .'\'; id_obat = \''. $p->id .'\'" class="text-indigo-400 font-medium text-lg hover:border-indigo-900 hover:border-b-2 hover:pb-1 hover:text-indigo-900 transition duration-200" id="hapus-'.$p->id.'" data-id="'. $p->id .'">Hapus</a>
                     ';
             $data[] = $row;
         }
@@ -166,17 +168,11 @@ class FarmasiController extends Controller
         return view('listobat/obat_data', $data)->render();
     }
 
-    public function deleteConfirm($id)
+    public function proses_hapus_obat(Request $request)
     {
-        $data['obat'] = Obat::where('id', '=', $id)->first();
-        return view('listobat/hapus_konfirmasi', $data);
-    }
-
-    public function delete_obat(Request $request)
-    {
-        $id = $request->input('noobat');
-        Obat::where('id', $id)->delete();
-        return redirect(url('/daftar_obat'))->with('message', "Obat <strong>" . $request->input('namaobat') . "</strong> berhasil dihapus");
+        $id = $request->input('id_obat');
+        $this->Obat->delete_obat($id);
+        return redirect(route('farmasi.index'))->with('message', "Obat <strong>" . $request->input('namaobat') . "</strong> berhasil dihapus");
     }
 
     public function tambah_obat()
