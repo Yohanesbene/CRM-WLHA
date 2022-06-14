@@ -13,11 +13,11 @@
               {{ Session::get('success') }}
             </div>
           @endif
-          <form method="POST" action="{{ route('mobilitas.prosestambah') }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('farmasi.proses_tambah_transaksi') }}" enctype="multipart/form-data">
             @csrf
             {{-- Nama Obat --}}
-            <x-label for="obat" :value="__('Nama Obat')" />
-            <select id="obat" name="obat" class="block w-full rounded-md border border-gray-300 px-3 py-2 text-xl placeholder-gray-400 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100">
+            <x-label for="id_obat" :value="__('Nama Obat')" />
+            <select id="id_obat" name="id_obat" class="block w-full rounded-md border border-gray-300 px-3 py-2 text-xl placeholder-gray-400 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100">
               <option></option>
               @foreach ($obat as $row)
                 <option value="{{ $row->id }}" {{ $id_obat == $row->id ? 'selected' : '' }}>{{ $row->namaobat }} -- {{ $row->kode_slug }}</option>
@@ -25,8 +25,8 @@
             </select>
 
             {{-- Jumlah Stock --}}
-            <x-label for="total" :value="__('Total Obat')" />
-            <x-input type="number" id="total" name="total" value="{{ old('total') ? old('total') : '' }}" placeholder=" Masukkan Total Obat" autocomplete="off" />
+            <x-label for="stokobat" :value="__('Stok Obat')" />
+            <x-input type="number" id="stokobat" name="stokobat" value="{{ old('stokobat') ? old('stokobat') : '' }}" placeholder=" Masukkan Stok Obat" autocomplete="off" />
 
             {{-- Keterangan --}}
             <x-label for="keterangan" :value="__('Keterangan Transaksi')" />
@@ -47,7 +47,7 @@
   </div>
   <script>
     $(document).ready(function() {
-      $('#obat').select2({
+      $('#id_obat').select2({
         placeholder: 'Pilih Salah Satu',
       });
     });
