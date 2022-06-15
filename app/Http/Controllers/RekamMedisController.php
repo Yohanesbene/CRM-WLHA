@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Penghuni;
+use App\Models\RekamMedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class RekamMedisController extends Controller
 {
@@ -14,6 +16,7 @@ class RekamMedisController extends Controller
     {
         $this->User = new User();
         $this->Penghuni = new Penghuni();
+        $this->RekamMedis = new RekamMedis();
         $this->satuan = [
             'nadi' => ' bpm',
             'spo2' => ' %',
@@ -25,6 +28,91 @@ class RekamMedisController extends Controller
             'bab' => '',
             'tekanan_darah' => ' mmHg',
             'pemberian_obat' => ''
+        ];
+
+        $this->table_name = [
+            'nadi' => 'mcu_nadi',
+            'spo2' => 'mcu_spo2',
+            'suhu_badan' => 'mcu_suhu_badan',
+            'berat_badan' => 'mcu_berat_badan',
+            'nutrisi' => 'mcu_nutrisi',
+            'cairan' => 'mcu_cairan',
+            'urine' => 'mcu_urine',
+            'bab' => 'mcu_bab',
+            'tekanan_darah' => 'mcu_tekanan_darah',
+            'pemberian_obat' => 'mcu_pemberian_obat'
+        ];
+
+        $this->columns = [
+            'nadi' => array(
+                0 => 'id_pegawai',
+                1 => 'hasil',
+                2 => 'waktu',
+                3 => 'action',
+            ),
+            'spo2' => array(
+                0 => 'id_pegawai',
+                1 => 'hasil',
+                2 => 'waktu',
+                3 => 'action',
+            ),
+            'suhu_badan' => array(
+                0 => 'id_pegawai',
+                1 => 'hasil',
+                2 => 'waktu',
+                3 => 'action',
+            ),
+            'berat_badan' => array(
+                0 => 'id_pegawai',
+                1 => 'hasil',
+                2 => 'waktu',
+                3 => 'action',
+            ),
+            'nutrisi' => array(
+                0 => 'id_pegawai',
+                1 => 'pagi',
+                2 => 'siang',
+                3 => 'sore',
+                4 => 'waktu',
+                5 => 'action',
+            ),
+            'cairan' => array(
+                0 => 'id_pegawai',
+                1 => 'pagi',
+                2 => 'siang',
+                3 => 'sore',
+                4 => 'waktu',
+                5 => 'action',
+            ),
+            'urine' => array(
+                0 => 'id_pegawai',
+                1 => 'pagi',
+                2 => 'siang',
+                3 => 'sore',
+                4 => 'waktu',
+                5 => 'action',
+            ),
+            'bab' => array(
+                0 => 'id_pegawai',
+                1 => 'pagi',
+                2 => 'siang',
+                3 => 'sore',
+                4 => 'waktu',
+                5 => 'action',
+            ),
+            'tekanan_darah' => array(
+                0 => 'id_pegawai',
+                1 => 'sistole',
+                2 => 'diastole',
+                3 => 'waktu',
+                4 => 'action',
+            ),
+            'pemberian_obat' => array(
+                0 => 'id_pegawai',
+                1 => 'dosis',
+                2 => 'waktu',
+                3 => 'action',
+            )
         ];
     }
 
@@ -53,26 +141,23 @@ class RekamMedisController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
 
-        if(empty($request->input('search.value')))
-        {
+        if (empty($request->input('search.value'))) {
             $penghuni = $this->Penghuni->daftar_penghuni('', $start, $limit, $order, $dir);
-        }
-        else
-        {
+        } else {
             $search = $request->input('search.value');
             $penghuni = $this->Penghuni->daftar_penghuni($search, $start, $limit, $order, $dir);
         }
         $data = array();
 
         foreach ($penghuni as $key => $p) {
-            $row['id'] = $start+$key+1;
+            $row['id'] = $start + $key + 1;
             $row['nama'] = $p->nama;
             $row['ruang'] = $p->ruang;
             $row['status'] = $p->meninggal == 0 || $p->keluar == 0 ?
-                    '<span class="bg-green-200 text-green-700 font-semibold py-1 px-3 rounded-full text-sm">Active</span>' :
-                    '<span class="bg-red-200 text-red-700 font-semibold py-1 px-3 rounded-full text-sm">Inactive</span>';
+                '<span class="bg-green-200 text-green-700 font-semibold py-1 px-3 rounded-full text-sm">Active</span>' :
+                '<span class="bg-red-200 text-red-700 font-semibold py-1 px-3 rounded-full text-sm">Inactive</span>';
             $row['action'] =
-                    '<a href="'. route('rekmed.detail', ['id' => $p->id]) .'" class="flex flex-nowrap items-center text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200">
+                '<a href="' . route('rekmed.detail', ['id' => $p->id]) . '" class="flex flex-nowrap items-center text-indigo-400 font-medium text-lg hover:text-indigo-900 transition duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg> <p class="pl-3">Rekam Medis</p>
@@ -81,10 +166,10 @@ class RekamMedisController extends Controller
         }
 
         $json_data = array(
-        "draw"            => intval($request->input('draw')),
-        "recordsTotal"    => intval($totalData),
-        "recordsFiltered" => intval($totalFiltered),
-        "data"            => $data
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
         );
 
         echo json_encode($json_data);
@@ -97,7 +182,7 @@ class RekamMedisController extends Controller
         foreach (['nadi', 'spo2', 'suhu_badan', 'berat_badan'] as $tb) {
             $data['data'][$tb] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
+                ->where('mcu_' . $tb . '.deleted', 0)
                 ->orderBy('waktu', 'desc')
                 ->limit(10)
                 ->get();
@@ -123,7 +208,7 @@ class RekamMedisController extends Controller
         foreach (['nutrisi', 'cairan', 'urine', 'bab'] as $tb) {
             $data['data_3'][$tb] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
+                ->where('mcu_' . $tb . '.deleted', 0)
                 ->orderBy('waktu', 'desc')
                 ->limit(10)
                 ->get();
@@ -136,22 +221,7 @@ class RekamMedisController extends Controller
         $data['page_url'] = '/user/detail_medis_table/' . $id . '/' . $tb;
 
         $data['penghuni'] = Penghuni::detail_penghuni($id);
-        if ($tb == 'pemberian_obat') {
-            $data['data'] = DB::table('mcu_' . 'pemberian_obat')
-                ->join('tb_obat', 'mcu_pemberian_obat.id_obat', '=', 'tb_obat.id')
-                ->select('mcu_pemberian_obat.*', 'tb_obat.namaobat')
-                ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
-                ->orderBy('waktu', 'desc')
-                ->paginate(10);
-        } else {
-            $data['data'] = DB::table('mcu_' . $tb)
-                ->where('id_penghuni', $id)
-                ->where('deleted', 0)
-                ->orderBy('waktu', 'desc')
-                ->paginate(10);
-        };
-        $data['data']->key = $tb;
+
         $date_prev = now()->subDays(30);
         $date_next = now();
         $data['date'] = [$date_prev, $date_next];
@@ -160,49 +230,86 @@ class RekamMedisController extends Controller
             $data['chart'] = DB::table('mcu_' . $tb)
                 ->select(DB::raw('id, id_penghuni, id_pegawai, waktu, COALESCE (pagi, siang, sore) AS hasil'))
                 ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
+                ->where('mcu_' . $tb . '.deleted', 0)
                 ->whereBetween('waktu', [$date_prev, $date_next->copy()->addDays(1)])
                 ->orderBy('waktu', 'desc')
                 ->get();
         } else {
             $data['chart'] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
+                ->where('mcu_' . $tb . '.deleted', 0)
                 ->whereBetween('waktu', [$date_prev, $date_next->copy()->addDays(1)])
                 ->orderBy('waktu', 'desc')
                 ->get();
         }
         $data['key'] = $tb;
-        $data['satuan'] = $this->satuan;
+        $data['satuan'] = $this->satuan[$tb];
+        $table_name = $this->table_name[$tb];
+
+        if ($table_name == 'mcu_pemberian_obat') {
+            $data['table_view'] = 'rekammedis.detail_medis_table_pemberian_obat';
+        } else if ($table_name == 'mcu_tekanan_darah') {
+            $data['table_view'] = 'rekammedis.detail_medis_table_tekanan_darah';
+        } else if (in_array($table_name, ['mcu_nutrisi', 'mcu_urine', 'mcu_bab', 'mcu_cairan'])) {
+            $data['table_view'] = 'rekammedis.detail_medis_table_pagi_siang_sore';
+        } else {
+            $data['table_view'] = 'rekammedis.detail_medis_table';
+        }
 
         return view('rekammedis.detail_medis_data', $data);
     }
 
-    public function detail_medis_table(Request $request, $id, $tb)
+    public function detail_medis_table(Request $request, $tb)
     {
-        $data['page_url'] = '/user/detail_medis_table/' . $id . '/' . $tb;
+        $columns = $this->columns[$tb];
 
-        $data['penghuni'] = Penghuni::detail_penghuni($id);
-        if ($tb == 'pemberian_obat') {
-            $data['data'] = DB::table('mcu_' . 'pemberian_obat')
-                ->join('tb_obat', 'mcu_pemberian_obat.id_obat', '=', 'tb_obat.id')
-                ->select('mcu_pemberian_obat.*', 'tb_obat.namaobat')
-                ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
-                ->orderBy('waktu', 'desc')
-                ->paginate(10);
-        } else {
-            $data['data'] = DB::table('mcu_' . $tb)
-                ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
-                ->orderBy('waktu', 'desc')
-                ->paginate(10);
+        $id_penghuni = $request->input('id_penghuni');
+        $table_name = $this->table_name[$tb];
+
+        $limit = $request->input('length');
+
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        $search = empty($request->input('search.value')) ? '' : $request->input('search.value');
+        $startDate = empty($request->input('startDate')) ? '' : $request->input('startDate');
+        $endDate = empty($request->input('endDate')) ? '' : $request->input('endDate');
+
+        $db_data = $this->RekamMedis->get_detail_medis_data($table_name, $id_penghuni, $search, $start, $limit, $order, $dir, $startDate, $endDate);
+        $totalData = $this->RekamMedis->count_detail_medis_data($table_name, $id_penghuni, $search, $startDate, $endDate);
+
+        $totalFiltered = $totalData;
+        $data = array();
+
+        foreach ($db_data as $key => $p) {
+            // $penghuni = $this->Penghuni->detail_penghuni($p->id_penghuni);
+            $row['id_pegawai'] = $p->id_pegawai;
+            if ($table_name == 'mcu_pemberian_obat') {
+                $row['dosis'] =  $p->namaobat . '<br>' . $p->dosis . ' dosis';
+            } else if ($table_name == 'mcu_tekanan_darah') {
+                $row['sistole'] = $p->sistole;
+                $row['diastole'] = $p->diastole;
+            } else if (in_array($table_name, ['mcu_nutrisi', 'mcu_urine', 'mcu_bab', 'mcu_cairan'])) {
+                $row['pagi'] = $p->pagi;
+                $row['siang'] = $p->siang;
+                $row['sore'] = $p->sore;
+            } else {
+                $row['hasil'] = $p->hasil;
+            }
+            $row['waktu'] = Carbon::parse($p->waktu)->format('d M Y - h:i');
+            $row['action'] = '';
+            $data[] = $row;
         }
-        $data['data']->key = $tb;
-        $data['key'] = $tb;
-        $data['satuan'] = $this->satuan;
 
-        return view('rekammedis.detail_medis_table', $data)->render();
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+
+        echo json_encode($json_data);
     }
 
     public function detail_medis_chart($id, $tb, $date_prev = '', $date_next = '')
@@ -221,14 +328,14 @@ class RekamMedisController extends Controller
             $data['chart'] = DB::table('mcu_' . $tb)
                 ->select(DB::raw('id, id_penghuni, id_pegawai, waktu, COALESCE (pagi, siang, sore) AS hasil'))
                 ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
+                ->where('mcu_' . $tb . '.deleted', 0)
                 ->whereBetween('waktu', [$date_prev, $date_next->copy()->addDays(1)])
                 ->orderBy('waktu', 'asc')
                 ->get();
         } else {
             $data['chart'] = DB::table('mcu_' . $tb)
                 ->where('id_penghuni', $id)
-                ->where('mcu_' . $tb.'.deleted', 0)
+                ->where('mcu_' . $tb . '.deleted', 0)
                 ->whereBetween('waktu', [$date_prev, $date_next->copy()->addDays(1)])
                 ->orderBy('waktu', 'asc')
                 ->get();
