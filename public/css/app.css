@@ -2154,6 +2154,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-3{margin-top:0.75rem;margin-bottom:0.75rem}
 
 
+.mx-1{margin-left:0.25rem;margin-right:0.25rem}
+
+
 .mb-0{margin-bottom:0px}
 
 
@@ -2559,6 +2562,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-l-0{border-left-width:0px}
 
 
+.border-l-2{border-left-width:2px}
+
+
 .border-dashed{border-style:dashed}
 
 
@@ -2581,6 +2587,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 
 .border-green-300{--tw-border-opacity:1;border-color:rgb(134 239 172 / var(--tw-border-opacity))}
+
+
+.border-slate-400{--tw-border-opacity:1;border-color:rgb(148 163 184 / var(--tw-border-opacity))}
 
 
 .border-green-200{--tw-border-opacity:1;border-color:rgb(187 247 208 / var(--tw-border-opacity))}
@@ -2650,6 +2659,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 
 .bg-purple-700{--tw-bg-opacity:1;background-color:rgb(126 34 206 / var(--tw-bg-opacity))}
+
+
+.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity))}
 
 
 .bg-opacity-50{--tw-bg-opacity:0.5}
@@ -2791,6 +2803,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 
 .lowercase{text-transform:lowercase}
+
+
+.capitalize{text-transform:capitalize}
 
 
 .italic{font-style:italic}
@@ -2964,7 +2979,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 tbody tr{font-size:1.125rem;line-height:1.75rem}
 
 
-.dataTables_wrapper .dataTables_paginate{display:flex;width:100%;align-items:center;justify-content:flex-start}
+.dataTables_wrapper .dataTables_paginate{display:flex !important;width:100% !important;align-items:center !important;justify-content:flex-start !important}
 
 
 .select2-container{width:100% !important}
@@ -2989,6 +3004,42 @@ tbody tr{font-size:1.125rem;line-height:1.75rem}
 
 
 .select2-container .selection .select2-selection .select2-selection__arrow{position:relative !important;margin-left:auto !important}
+
+
+.select2-hidden-accessible{position:fixed !important;top:0px !important;left:0px !important;margin:0px !important;display:none !important}
+
+
+@media screen and (max-width: 1024px){div.dt-button-collection.select2-hidden-accessible.columns{margin-left:-308px !important}}
+
+
+@media screen and (max-width: 640px){div.dt-button-collection.select2-hidden-accessible.columns{margin-left:-203px !important}}
+
+
+@media screen and (max-width: 460px){div.dt-button-collection.select2-hidden-accessible.columns{margin-left:-100px !important}}
+
+
+div.dt-button-collection.select2-hidden-accessible .dt-button:first-child{margin-top:0 !important;border-top-left-radius:0 !important;border-top-right-radius:0 !important}
+
+
+div.dt-button-collection.select2-hidden-accessible .dt-button:last-child{border-bottom-left-radius:0 !important;border-bottom-right-radius:0 !important}
+
+
+div.dt-button-collection.select2-hidden-accessible{position:fixed !important;display:block !important;top:50% !important;left:50% !important;margin-left:-75px !important;border-radius:5px !important;background-color:white !important}
+
+
+div.dt-button-collection.select2-hidden-accessible.two-column{margin-left:-200px !important}
+
+
+div.dt-button-collection.select2-hidden-accessible.three-column{margin-left:-225px !important}
+
+
+div.dt-button-collection.select2-hidden-accessible.four-column{margin-left:-300px !important}
+
+
+div.dt-button-collection.select2-hidden-accessible.columns{margin-left:-409px !important}
+
+
+div.dt-button-collection.select2-hidden-accessible>:last-child{max-height:100vh !important;overflow:auto !important}
 
 
 /*.dataTables_wrapper .dataTables_paginate span .paginate_button {
