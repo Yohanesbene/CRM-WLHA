@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Illuminate\Support\Facades\Route;
@@ -59,7 +60,6 @@ Route::group(['prefix' => 'pegawai', 'as' => 'pegawai.'], function () {
     Route::post('/ubahpassword/proses', [PegawaiController::class, 'prosesUbahPassword'])->name('prosesubahpassword');
     Route::get('/ubahpegawai/{id}', [PegawaiController::class, 'ubahPegawai'])->name('ubah');
     Route::post('/ubahpegawai/proses', [PegawaiController::class, 'prosesUbahPegawai'])->name('prosesubah');
-
 });
 
 Route::group(['prefix' => 'penghuni', 'as' => 'penghuni.'], function () {
@@ -84,7 +84,7 @@ Route::group(['prefix' => 'rekmed', 'as' => 'rekmed.'], function () {
     Route::get('/detail/{id}', [RekamMedisController::class, 'detailMedis'])->name('detail');
 
     Route::get('detail_medis_data/{id}/{data}', [RekamMedisController::class, 'detail_medis_data'])->name('data_details');
-    Route::get('detail_medis_table/{id}/{data}', [RekamMedisController::class, 'detail_medis_table'])->name('data_details_table');
+    Route::post('detail_medis_table/{data}', [RekamMedisController::class, 'detail_medis_table'])->name('data_details_table');
     Route::get('detail_medis_chart/{id}/{data}/{from_date}/{until_date}', [RekamMedisController::class, 'detail_medis_chart'])->name('detail_medis_chart');
 
     Route::get('hapus_mcu/{id}/{data}/{id_penghuni}', [UserController::class, 'hapus_mcu'])->name('hapus');
@@ -113,9 +113,14 @@ Route::group(['prefix' => 'farmasi', 'as' => 'farmasi.'], function () {
     Route::post('/hapus', [FarmasiController::class, 'hapus_obat'])->name('hapus_obat');
     Route::post('/konfirm_hapus', [FarmasiController::class, 'konfirmasi_hapus_obat'])->name('konfirmasi_hapus_obat');
     Route::post('/proses_hapus', [FarmasiController::class, 'proses_hapus_obat'])->name('proses_hapus_obat');
+    Route::post('/proses_hapus_transaksi', [FarmasiController::class, 'proses_hapus_transaksi'])->name('proses_hapus_transaksi');
     Route::post('/proses_tambah_obat', [FarmasiController::class, 'proses_tambah_obat'])->name('proses_tambah_obat');
+    Route::post('/proses_tambah_transaksi', [FarmasiController::class, 'proses_tambah_transaksi'])->name('proses_tambah_transaksi');
     Route::get('/transaksi/{id_obat}', [FarmasiController::class, 'transaksi'])->name('transaksi');
     Route::get('/tambah_transaksi/{id_obat?}', [FarmasiController::class, 'tambah_transaksi'])->name('tambah_transaksi');
+    Route::post('/proses_edit_obat', [FarmasiController::class, 'proses_edit_obat'])->name('proses_edit_obat');
+    Route::post('/proses_edit_transaksi', [FarmasiController::class, 'proses_edit_transaksi'])->name('proses_edit_transaksi');
+    Route::get('/edit_obat/{id_obat}', [FarmasiController::class, 'edit_obat'])->name('edit_obat');
     Route::get('/edit_transaksi/{id_history}', [FarmasiController::class, 'edit_transaksi'])->name('edit_transaksi');
     Route::post('/transaksi_data', [FarmasiController::class, 'transaksi_data'])->name('transaksi_data');
 

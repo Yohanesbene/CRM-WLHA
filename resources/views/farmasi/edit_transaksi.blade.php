@@ -13,15 +13,18 @@
               {{ Session::get('success') }}
             </div>
           @endif
-          <form method="POST" action="{{ route('mobilitas.prosestambah') }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('farmasi.proses_edit_transaksi') }}" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" id="id" name="id" value={{ $history->id }} />
+            <input type="hidden" id="id_obat" name="id_obat" value={{ $history->id_obat }} />
+
             {{-- Nama Obat --}}
             <x-label for="namaobat" :value="__('Nama Obat')" />
             <x-input type="text" id="namaobat" name="namaobat" value="{{ $obat->namaobat }}" placeholder=" Masukkan Total Obat" autocomplete="off" :disabled=true />
 
             {{-- Jumlah Stock --}}
-            <x-label for="total" :value="__('Total Obat')" />
-            <x-input type="number" id="total" name="total" value="{{ old('total', $history->stokobat) ? old('total', $history->stokobat) : '' }}" placeholder=" Masukkan Total Obat" autocomplete="off" />
+            <x-label for="stokobat" :value="__('Stok Obat')" />
+            <x-input type="number" id="stokobat" name="stokobat" value="{{ old('stokobat', $history->stokobat) ? old('stokobat', $history->stokobat) : '' }}" placeholder=" Masukkan Stok Obat" autocomplete="off" />
 
             {{-- Keterangan --}}
             <x-label for="keterangan" :value="__('Keterangan Transaksi')" />

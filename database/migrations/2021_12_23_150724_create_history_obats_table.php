@@ -20,7 +20,8 @@ class CreateHistoryObatsTable extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->integer('stokobat')->default(0);
-            
+            $table->integer('deleted')->default(0);
+
             $table->foreign('id_obat')->references('id')->on('tb_obat')->onUpdate('cascade')->onDelete('no action');
         });
     }
@@ -32,7 +33,7 @@ class CreateHistoryObatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_history_obat', function(Blueprint $table){
+        Schema::dropIfExists('tb_history_obat', function (Blueprint $table) {
             $table->dropForeign(['id_obat']);
         });
     }

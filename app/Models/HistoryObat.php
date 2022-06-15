@@ -62,27 +62,52 @@ class HistoryObat extends Model
     public static function stok_obat($id)
     {
         $data = HistoryObat::where('id_obat', $id)
+            ->where('deleted', 0)
             ->sum('stokobat');
 
         return $data;
     }
 
-    public static function histori($query, $id_obat, $start, $limit, $order, $dir)
+    public static function histori($query, $id_obat, $start, $limit, $order, $dir, $startDate = '', $endDate = '')
     {
-        if($query != '')
-        {
-            $data = HistoryObat::where('id_obat', $id_obat)
-                ->where('keterangan', 'like', "%" . $query . "%")
-                ->offset($start)
-                ->limit($limit)
-                ->orderBy($order,$dir)
-                ->get();
+        if ($query != '') {
+            if ($startDate != '' & $endDate != '') {
+                $data = HistoryObat::where('id_obat', $id_obat)
+                    ->where('deleted', 0)
+                    ->where('keterangan', 'like', "%" . $query . "%")
+                    ->where('created_at', '>=', $startDate)
+                    ->where('created_at', '<=', $endDate)
+                    ->offset($start)
+                    ->limit($limit)
+                    ->orderBy($order, $dir)
+                    ->get();
+            } else {
+                $data = HistoryObat::where('id_obat', $id_obat)
+                    ->where('deleted', 0)
+                    ->where('keterangan', 'like', "%" . $query . "%")
+                    ->offset($start)
+                    ->limit($limit)
+                    ->orderBy($order, $dir)
+                    ->get();
+            }
         } else {
-            $data = HistoryObat::where('id_obat', $id_obat)
-                ->offset($start)
-                ->limit($limit)
-                ->orderBy($order,$dir)
-                ->get();
+            if ($startDate != '' & $endDate != '') {
+                $data = HistoryObat::where('id_obat', $id_obat)
+                    ->where('deleted', 0)
+                    ->where('created_at', '>=', $startDate)
+                    ->where('created_at', '<=', $endDate)
+                    ->offset($start)
+                    ->limit($limit)
+                    ->orderBy($order, $dir)
+                    ->get();
+            } else {
+                $data = HistoryObat::where('id_obat', $id_obat)
+                    ->where('deleted', 0)
+                    ->offset($start)
+                    ->limit($limit)
+                    ->orderBy($order, $dir)
+                    ->get();
+            }
         }
 
         return $data;
@@ -96,19 +121,23 @@ class HistoryObat extends Model
 
     public static function histori_count($query, $id_obat)
     {
-        if($query != '')
-        {
+        if ($query != '') {
             $data = DB::table('tb_history_obat')
                 ->selectRaw('count(id_obat) as total')
                 ->where('id_obat', $id_obat)
-                ->where('keterangan', 'like', "%".$query."%")
+                ->where('keterangan', 'like', "%" . $query . "%")
                 ->first();
-        }else{
+        } else {
             $data = DB::table('tb_history_obat')
                 ->selectRaw('count(id_obat) as total')
                 ->where('id_obat', $id_obat)
                 ->first();
         }
         return $data;
+    }
+
+    public static function delete_transaksi($id)
+    {
+        HistoryObat::where('id', $id)->update(['deleted' => 1]);
     }
 }
