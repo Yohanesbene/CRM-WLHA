@@ -21,7 +21,7 @@ tbody tr{
 }
 
 .dataTables_wrapper .dataTables_paginate {
-    @apply flex justify-start w-full items-center;
+    @apply flex justify-start w-full items-center !important;
 }
 
 .select2-container
@@ -41,6 +41,9 @@ tbody tr{
     @apply relative ml-auto !important;
 }
 
+.select2-hidden-accessible{
+    @apply hidden m-0 top-0 left-0 fixed !important;
+}
 /*.dataTables_wrapper .dataTables_paginate span .paginate_button {
     @apply align-middle bg-indigo-400 rounded-lg text-white border-0 bg-none h-11 hover:bg-indigo-600 active:bg-indigo-600 !important;
 }

@@ -1,4 +1,4 @@
-<div class="mt-8 flex w-full flex-col">
+<div class="mt-8 flex flex-col">
   <div>
     @if (Session::has('message_success'))
       @for ($i = 0; $i < count(Session::get('message_success')); $i++)
@@ -11,11 +11,13 @@
   </div>
   <div class="overflow-x-auto">
     <div class="inline-block min-w-full overflow-hidden border-b border-gray-200 align-middle shadow-md">
-      <table id="table-data" class="display cell-border min-w-full" style="width:100%">
+      <table id="table-data" class="display cell-border min-w-full" width="100%">
         <thead class="bg-gray-50">
           <tr class="text-base uppercase leading-normal text-black">
             <th class="py-3 px-6 text-left font-semibold">ID Pegawai</th>
-            <th class="py-3 px-6 text-left font-semibold">Hasil</th>
+            <th class="py-3 px-6 text-left font-semibold">Pagi</th>
+            <th class="py-3 px-6 text-left font-semibold">Siang</th>
+            <th class="py-3 px-6 text-left font-semibold">Sore</th>
             <th class="py-3 px-6 text-left font-semibold">Waktu</th>
             <th class="py-3 px-6 text-left font-semibold">Action</th>
           </tr>
@@ -28,8 +30,6 @@
   $(document).ready(function() {
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
-    var startDate = "";
-    var endDate = '';
     const dt_table = $('#table-data').DataTable({
       "processing": true,
       "serverSide": true,
@@ -38,16 +38,16 @@
       buttons: [{
         extend: 'print',
         exportOptions: {
-          columns: [0, 1, 2, 3]
+          columns: [0, 1, 2, 3, 4, 5]
         }
       }],
       columnDefs: [{
           orderable: false,
-          targets: 3
+          targets: 5
         },
         {
           "searchable": false,
-          "targets": 2
+          "targets": 4
         }
       ],
       "pageLength": 7,
@@ -58,9 +58,9 @@
         "type": "POST",
         "data": function(dtParams) {
           dtParams._token = "{{ csrf_token() }}";
+          dtParams.id_penghuni = "{{ $penghuni->id }}";
           dtParams.startDate = $('#fromDate').val();
           dtParams.endDate = $('#untilDate').val();
-          dtParams.id_penghuni = "1";
           return dtParams
         }
       },
@@ -68,7 +68,13 @@
           'data': 'id_pegawai'
         },
         {
-          'data': 'hasil'
+          'data': 'pagi'
+        },
+        {
+          'data': 'siang'
+        },
+        {
+          'data': 'sore'
         },
         {
           'data': 'waktu'
@@ -96,7 +102,6 @@
     };
 
     draw_table();
-
     $(document).on('change', '#fromDate', function(event) {
       event.preventDefault();
       var fromDate = $('#fromDate').val();

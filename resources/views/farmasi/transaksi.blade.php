@@ -31,6 +31,7 @@
           <a class="mr-2 flex items-center rounded-md bg-indigo-400 px-5 py-2 align-middle font-semibold text-white shadow-md transition duration-200 hover:bg-indigo-600" href="#" @click="{{ $modal_name }} = false">Batalkan</a>
         </form>
       </x-modal>
+      {{-- END: Modal Delete --}}
       <!-- START: List Obat -->
       <div class="block rounded-md bg-white p-8">
         <h2 class="text-black-400 mb-3 text-3xl font-semibold leading-tight">Inventaris Obat - {{ $obat->namaobat }}</h2>
