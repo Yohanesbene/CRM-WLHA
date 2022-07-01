@@ -158,9 +158,9 @@
 <div class="mb-96 flex h-full">
   <div class="h-full overflow-y-auto bg-indigo-50" :class="sidebarOpen ? 'w-screen' : 'w-full'" id='content'>
     {{ $slot }}
-    <div class="absolute bottom-0 w-full bg-white text-center">
+    {{-- <div class="absolute bottom-0 w-full bg-white text-center">
       Dibuat oleh Teknik Informatika Universitas Katolik Soegijapranata (UNIKA Soegijapranata)
-    </div>
+    </div> --}}
   </div>
 
   <script>

@@ -81,7 +81,7 @@ Route::group(['prefix' => 'rekmed', 'as' => 'rekmed.'], function () {
     Route::post('detail_medis_table/{data}', [RekamMedisController::class, 'detail_medis_table'])->name('data_details_table');
     Route::get('detail_medis_chart/{id}/{data}/{from_date}/{until_date}', [RekamMedisController::class, 'detail_medis_chart'])->name('detail_medis_chart');
 
-    Route::get('hapus_mcu/{id}/{data}/{id_penghuni}', [UserController::class, 'hapus_mcu'])->name('hapus');
+    Route::post('hapus_mcu', [RekamMedisController::class, 'hapus_mcu'])->name('hapus');
     Route::get('/tambah/{bagian}/{id}', [RekamMedisController::class, 'tambah_mcu'])->name('tambah');
     Route::post('simpan_mcu', [RekamMedisController::class, 'simpan_mcu'])->name('simpan');
 });
