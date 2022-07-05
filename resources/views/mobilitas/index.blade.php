@@ -4,14 +4,14 @@
     :class="{ 'overflow-y-hidden': modalDetailMobilitas }">
     <div class="flex-auto bg-indigo-50 py-6 px-10">
       <!-- START: List Mobilitas -->
-      <div class="block p-8 bg-white rounded-md">
-        <h2 class="text-3xl font-semibold text-black-400 leading-tight mb-3">Daftar Mobilitas</h2>
+      <div class="block rounded-md bg-white p-8">
+        <h2 class="text-black-400 mb-3 text-3xl font-semibold leading-tight">Daftar Mobilitas</h2>
         <div class="flex">
           <a href="{{ route('mobilitas.tambah') }}">
             <button
-              class=" flex bg-indigo-400 px-2 py-2 align-middle rounded-md text-white font-semibold shadow-md items-center hover:bg-indigo-600 transition duration-200">
+              class="flex items-center rounded-md bg-indigo-400 px-2 py-2 align-middle font-semibold text-white shadow-md transition duration-200 hover:bg-indigo-600">
               <svg class="mr-2 justify-center" width="24" height="30" viewBox="0 0 24 24" fill="none"
-                xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline-block">
+                xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6">
                 <path d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
                                     C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
                                     C15.952,9,16,9.447,16,10z" fill="currentColor" />
@@ -21,11 +21,11 @@
           </a>
         </div>
         <!-- START: Data Table -->
-        <div class="flex flex-col mt-8">
+        <div class="mt-8 flex flex-col">
           <div>
             @if (Session::has('message_success'))
               @for ($i = 0; $i < count(Session::get('message_success')); $i++)
-                <div class="py-3 px-5 mb-4 bg-green-100 text-green-900 text-sm rounded-md border border-red-200"
+                <div class="mb-4 rounded-md border border-red-200 bg-green-100 py-3 px-5 text-sm text-green-900"
                   role="alert">
                   {{ Session::get('message_success')[$i] }}
                 </div>
@@ -33,16 +33,16 @@
             @endif
           </div>
           <div class="overflow-x-auto">
-            <div class="align-middle inline-block min-w-full shadow-md overflow-hidden border-b border-gray-200 rounded-lg">
-              <table id="table-data" class="min-w-full display cell-border">
+            <div class="inline-block min-w-full overflow-hidden rounded-lg border-b border-gray-200 align-middle shadow-md">
+              <table id="table-data" class="display cell-border min-w-full">
                 <thead class="bg-gray-50">
-                  <tr class="text-black uppercase text-base leading-normal">
-                    <th class="text-left py-3 px-6 font-semibold">ID</th>
-                    <th class="text-left py-3 px-6 font-semibold">No Induk / Nama</th>
-                    <th class="text-left py-3 px-6 font-semibold">Tujuan</th>
-                    <th class="text-left py-3 px-6 font-semibold">Waktu Keberangkatan</th>
-                    <th class="text-left py-3 px-6 font-semibold">Waktu Kepulangan</th>
-                    <th class="text-left py-3 px-6 font-semibold">Action</th>
+                  <tr class="text-base uppercase leading-normal text-black">
+                    <th class="py-3 px-6 text-left font-semibold">ID</th>
+                    <th class="py-3 px-6 text-left font-semibold">No Induk / Nama</th>
+                    <th class="py-3 px-6 text-left font-semibold">Tujuan</th>
+                    <th class="py-3 px-6 text-left font-semibold">Waktu Keberangkatan</th>
+                    <th class="py-3 px-6 text-left font-semibold">Waktu Kepulangan</th>
+                    <th class="py-3 px-6 text-left font-semibold">Action</th>
                   </tr>
                 </thead>
               </table>
@@ -52,19 +52,19 @@
       </div>
     </div>
 
-    <div class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
+    <div class="fixed inset-0 z-20 h-full w-full overflow-y-auto bg-black bg-opacity-50 duration-300"
       x-show="modalDetailMobilitas" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0"
       x-transition:enter-end="opacity-100" x-transition:leave="transition duration-300"
       x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-      <div class="relative sm:w-3/4 md:w-1/2 lg:w-2/4 mx-2 sm:mx-auto my-10 opacity-100"
+      <div class="relative mx-2 my-10 opacity-100 sm:mx-auto sm:w-3/4 md:w-1/2 lg:w-2/4"
         @click.away="modalDetailMobilitas = false" x-show="modalDetailMobilitas"
         x-transition:enter="transition transform duration-300" x-transition:enter-start="scale-0"
         x-transition:enter-end="scale-100" x-transition:leave="transition transform duration-300"
         x-transition:leave-start="scale-100" x-transition:leave-end="scale-0">>
-        <div class="relative bg-white shadow-lg rounded-md text-gray-900 z-20 p-8">
-          <header class="flex items-center justify-between mb-12">
-            <h2 class="font-semibold uppercase text-xl">Detail Mobilitas</h2>
-            <button class="focus:outline-none p-2" @click="modalDetailMobilitas = false">
+        <div class="relative z-20 rounded-md bg-white p-8 text-gray-900 shadow-lg">
+          <header class="mb-12 flex items-center justify-between">
+            <h2 class="text-xl font-semibold uppercase">Detail Mobilitas</h2>
+            <button class="p-2 focus:outline-none" @click="modalDetailMobilitas = false">
               <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                 viewBox="0 0 18 18">
                 <path
@@ -73,52 +73,52 @@
               </svg>
             </button>
           </header>
-          <div class="flex items-center mb-8">
+          <div class="mb-8 flex items-center">
             {{-- <img id="detailFoto" class="h-48 w-48 rounded-full mx-auto" src="https://randomuser.me/api/portraits/men/24.jpg" alt="User Picture"> --}}
-            <img id="detailFoto" class="h-48 w-48 rounded-full mx-auto" alt="User Picture">
+            <img id="detailFoto" class="mx-auto h-48 w-48 rounded-full" alt="User Picture">
 
           </div>
           <div class="grid text-base">
             <div class="grid grid-cols-2">
-              <div class="pr-4 py-2 font-semibold">Nama Lengkap </div>
-              <div class="pr-4 py-2" id="detailNama"></div>
+              <div class="py-2 pr-4 font-semibold">Nama Lengkap </div>
+              <div class="py-2 pr-4" id="detailNama"></div>
             </div>
             <div class="grid grid-cols-2">
-              <div class="pr-4 py-2 font-semibold">No. Telp. Darurat </div>
-              <div class="pr-4 py-2" id="detailKontak"></div>
+              <div class="py-2 pr-4 font-semibold">No. Telp. Darurat </div>
+              <div class="py-2 pr-4" id="detailKontak"></div>
             </div>
             <div class="grid grid-cols-2">
-              <div class="pr-4 py-2 font-semibold">Tujuan Keluar </div>
-              <div class="pr-4 py-2" id="detailTujuan"></div>
+              <div class="py-2 pr-4 font-semibold">Tujuan Keluar </div>
+              <div class="py-2 pr-4" id="detailTujuan"></div>
             </div>
             <div class="grid grid-cols-2">
-              <div class="pr-4 py-2 font-semibold">Tanggal Keluar</div>
-              <div class="pr-4 py-2" id="detailTglKeluar"></div>
+              <div class="py-2 pr-4 font-semibold">Tanggal Keluar</div>
+              <div class="py-2 pr-4" id="detailTglKeluar"></div>
             </div>
             <div class="grid grid-cols-2">
-              <div class="pr-4 py-2 font-semibold">Petugas Keluar</div>
-              <div class="pr-4 py-2" id="detailPetugasKeluar"></div>
+              <div class="py-2 pr-4 font-semibold">Petugas Keluar</div>
+              <div class="py-2 pr-4" id="detailPetugasKeluar"></div>
             </div>
             <div class="grid grid-cols-2">
-              <div class="pr-4 py-2 font-semibold">Tanggal Kembali</div>
-              <div class="pr-4 py-2" id="detailTglKembali"></div>
+              <div class="py-2 pr-4 font-semibold">Tanggal Kembali</div>
+              <div class="py-2 pr-4" id="detailTglKembali"></div>
             </div>
             <div class="grid grid-cols-2">
-              <div class="pr-4 py-2 font-semibold">Petugas Kembali</div>
-              <div class="pr-4 py-2" id="detailPetugasKembali"></div>
+              <div class="py-2 pr-4 font-semibold">Petugas Kembali</div>
+              <div class="py-2 pr-4" id="detailPetugasKembali"></div>
             </div>
           </div>
           <div class="grid grid-cols-2">
-            <div class="pr-4 py-2 font-semibold" id="detailStatusUser">Status Mobilitas</div>
-            <div class="pr-4 py-2">
-              <span id="detailStatus" class="font-semibold py-1 px-3 rounded-full text-sm"
+            <div class="py-2 pr-4 font-semibold" id="detailStatusUser">Status Mobilitas</div>
+            <div class="py-2 pr-4">
+              <span id="detailStatus" class="rounded-full py-1 px-3 text-sm font-semibold"
                 id="detailActive"></span>
             </div>
           </div>
         </div>
       </div>
+      <button id="test">Test</button>
     </div>
-  </div>
   </div>
   <script>
     $(document).ready(function() {

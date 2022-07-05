@@ -2094,13 +2094,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .z-20{z-index:20}
 
 
-.z-50{z-index:50}
-
-
 .z-10{z-index:10}
 
 
 .z-0{z-index:0}
+
+
+.z-50{z-index:50}
 
 
 .col-span-2{grid-column:span 2 / span 2}
@@ -2109,16 +2109,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 .col-span-3{grid-column:span 3 / span 3}
 
 
+.row-span-2{grid-row:span 2 / span 2}
+
+
+.row-span-4{grid-row:span 4 / span 4}
+
+
 .float-right{float:right}
+
+
+.m-3{margin:0.75rem}
 
 
 .m-2{margin:0.5rem}
 
 
 .m-auto{margin:auto}
-
-
-.m-3{margin:0.75rem}
 
 
 .mx-auto{margin-left:auto;margin-right:auto}
@@ -2247,6 +2253,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-ml-px{margin-left:-1px}
 
 
+.mb-10{margin-bottom:2.5rem}
+
+
 .block{display:block}
 
 
@@ -2358,6 +2367,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-72{width:18rem}
 
 
+.w-min{width:-webkit-min-content;width:-moz-min-content;width:min-content}
+
+
+.w-fit{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}
+
+
 .min-w-full{min-width:100%}
 
 
@@ -2424,6 +2439,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}
 
 
+.grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}
+
+
+.grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}
+
+
+.grid-cols-\[1fr_1fr_1fr\]{grid-template-columns:1fr 1fr 1fr}
+
+
 .grid-rows-2{grid-template-rows:repeat(2, minmax(0, 1fr))}
 
 
@@ -2437,6 +2461,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 
 .flex-nowrap{flex-wrap:nowrap}
+
+
+.place-content-center{place-content:center}
 
 
 .place-content-end{place-content:end}
@@ -2472,10 +2499,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .gap-2{gap:0.5rem}
 
 
-.gap-3{gap:0.75rem}
-
-
 .gap-0{gap:0px}
+
+
+.gap-3{gap:0.75rem}
 
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}
@@ -2526,13 +2553,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-l-lg{border-top-left-radius:0.5rem;border-bottom-left-radius:0.5rem}
 
 
+.rounded-r-md{border-top-right-radius:0.375rem;border-bottom-right-radius:0.375rem}
+
+
 .rounded-r-lg{border-top-right-radius:0.5rem;border-bottom-right-radius:0.5rem}
 
 
 .rounded-l-md{border-top-left-radius:0.375rem;border-bottom-left-radius:0.375rem}
-
-
-.rounded-r-md{border-top-right-radius:0.375rem;border-bottom-right-radius:0.375rem}
 
 
 .border{border-width:1px}
@@ -2559,6 +2586,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-l-0{border-left-width:0px}
 
 
+.border-l-2{border-left-width:2px}
+
+
 .border-dashed{border-style:dashed}
 
 
@@ -2583,13 +2613,19 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-green-300{--tw-border-opacity:1;border-color:rgb(134 239 172 / var(--tw-border-opacity))}
 
 
+.border-slate-400{--tw-border-opacity:1;border-color:rgb(148 163 184 / var(--tw-border-opacity))}
+
+
 .border-green-200{--tw-border-opacity:1;border-color:rgb(187 247 208 / var(--tw-border-opacity))}
+
+
+.border-indigo-200{--tw-border-opacity:1;border-color:rgb(199 210 254 / var(--tw-border-opacity))}
 
 
 .border-indigo-600{--tw-border-opacity:1;border-color:rgb(79 70 229 / var(--tw-border-opacity))}
 
 
-.border-indigo-200{--tw-border-opacity:1;border-color:rgb(199 210 254 / var(--tw-border-opacity))}
+.border-transparent{border-color:transparent}
 
 
 .bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}
@@ -2629,6 +2665,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 
 .bg-green-400{--tw-bg-opacity:1;background-color:rgb(74 222 128 / var(--tw-bg-opacity))}
+
+
+.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity))}
 
 
 .bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity))}
@@ -2743,6 +2782,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 
 .pl-3{padding-left:0.75rem}
+
+
+.pl-2{padding-left:0.5rem}
+
+
+.pb-1{padding-bottom:0.25rem}
 
 
 .text-left{text-align:left}
@@ -2964,7 +3009,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 tbody tr{font-size:1.125rem;line-height:1.75rem}
 
 
-.dataTables_wrapper .dataTables_paginate{display:flex;width:100%;align-items:center;justify-content:flex-start}
+.dataTables_wrapper .dataTables_paginate{display:flex !important;width:100% !important;align-items:center !important;justify-content:flex-start !important}
 
 
 .select2-container{width:100% !important}
@@ -2989,6 +3034,42 @@ tbody tr{font-size:1.125rem;line-height:1.75rem}
 
 
 .select2-container .selection .select2-selection .select2-selection__arrow{position:relative !important;margin-left:auto !important}
+
+
+.select2-hidden-accessible{position:fixed !important;top:0px !important;left:0px !important;margin:0px !important;display:none !important}
+
+
+@media screen and (max-width: 1024px){div.dt-button-collection.select2-hidden-accessible.columns{margin-left:-308px !important}}
+
+
+@media screen and (max-width: 640px){div.dt-button-collection.select2-hidden-accessible.columns{margin-left:-203px !important}}
+
+
+@media screen and (max-width: 460px){div.dt-button-collection.select2-hidden-accessible.columns{margin-left:-100px !important}}
+
+
+div.dt-button-collection.select2-hidden-accessible .dt-button:first-child{margin-top:0 !important;border-top-left-radius:0 !important;border-top-right-radius:0 !important}
+
+
+div.dt-button-collection.select2-hidden-accessible .dt-button:last-child{border-bottom-left-radius:0 !important;border-bottom-right-radius:0 !important}
+
+
+div.dt-button-collection.select2-hidden-accessible{position:fixed !important;display:block !important;top:50% !important;left:50% !important;margin-left:-75px !important;border-radius:5px !important;background-color:white !important}
+
+
+div.dt-button-collection.select2-hidden-accessible.two-column{margin-left:-200px !important}
+
+
+div.dt-button-collection.select2-hidden-accessible.three-column{margin-left:-225px !important}
+
+
+div.dt-button-collection.select2-hidden-accessible.four-column{margin-left:-300px !important}
+
+
+div.dt-button-collection.select2-hidden-accessible.columns{margin-left:-409px !important}
+
+
+div.dt-button-collection.select2-hidden-accessible>:last-child{max-height:100vh !important;overflow:auto !important}
 
 
 /*.dataTables_wrapper .dataTables_paginate span .paginate_button {
@@ -3251,6 +3332,9 @@ tbody tr{font-size:1.125rem;line-height:1.75rem}
 .md\:grid-cols-\[4fr_10fr\]{grid-template-columns:4fr 10fr}
 
 
+.md\:grid-cols-\[2fr_4fr_10fr\]{grid-template-columns:2fr 4fr 10fr}
+
+
 .md\:border-t-0{border-top-width:0px}
 
 
@@ -3276,6 +3360,12 @@ tbody tr{font-size:1.125rem;line-height:1.75rem}
 
 
 .lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}
+
+
+.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}
+
+
+.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}
 
 
 .lg\:flex-row{flex-direction:row}

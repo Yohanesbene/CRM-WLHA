@@ -32,6 +32,7 @@
                         <br>
                     @endif --}}
             <select id="IDPenghuni" name="IDPenghuni" class="block w-full rounded-md border border-gray-300 px-3 py-2 text-xl text-red-400 placeholder-gray-400 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100">
+              <option value=""></option>
               @foreach ($penghuni as $row)
                 <option value="{{ $row->id }}">{{ $row->no_induk }} {{ $row->nama }}</option>
               @endforeach

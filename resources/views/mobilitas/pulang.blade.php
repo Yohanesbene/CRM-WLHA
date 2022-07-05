@@ -1,11 +1,11 @@
 <x-app-layout>
   <div class="flex h-screen w-full">
     <div class="flex-auto bg-indigo-50 py-6 px-10">
-      <div class="block p-8 bg-white rounded-md">
-        <header class="flex items-center justify-center mb-12">
-          <h2 class="font-semibold uppercase text-2xl">Tambah Kepulangan Penghuni</h2>
+      <div class="block rounded-md bg-white p-8">
+        <header class="mb-12 flex items-center justify-center">
+          <h2 class="text-2xl font-semibold uppercase">Tambah Kepulangan Penghuni</h2>
         </header>
-        <div class="grid grid-cols-[1fr_1fr] md:grid-cols-[4fr_10fr] text-lg gap-2 my-4 align-items-center">
+        <div class="align-items-center my-4 grid grid-cols-[1fr_1fr] gap-2 text-lg md:grid-cols-[4fr_10fr]">
           <b>Nama Penghuni</b>
           <p>{{ $penghuni->nama }}</p>
           <b>Tujuan Keluar</b>
@@ -16,7 +16,7 @@
           <p>{{ $mobilitas->petugas_keluar }}</p>
         </div>
         @if (count($errors) > 0)
-          <div class="py-3 px-5 mb-4 bg-red-100 text-red-900 text-sm rounded-md border border-red-200"
+          <div class="mb-4 rounded-md border border-red-200 bg-red-100 py-3 px-5 text-sm text-red-900"
             role="alert">
             <ul>
               @foreach ($errors->all() as $error)
@@ -27,7 +27,7 @@
         @endif
         <form method="POST" action="{{ route('mobilitas.tambah_pulang') }}" enctype="multipart/form-data">
           @csrf
-          <div class="flex justify-between items-center space-x-4 text-lg">
+          <div class="flex items-center justify-between space-x-4 text-lg">
             <!-- Tgl Lahir Input -->
             <input name="id" type="hidden" value="{{ $mobilitas->id }}">
 
@@ -40,10 +40,10 @@
             @endif
           </div>
           <!-- Button Input -->
-          <p class="flex flex-col sm:flex-row items-center justify-center mt-4 text-center text-lg text-gray-500 space-y-6 mb-6">
-            <input type="submit" class="w-full sm:w-1/2 mt-6 bg-indigo-400 sm:mr-2 px-4 py-4 rounded-md text-white font-semibold shadow-md items-center hover:bg-indigo-600 transition duration-200" value="Simpan">
+          <p class="mt-4 mb-6 flex flex-col items-center justify-center space-y-6 text-center text-lg text-gray-500 sm:flex-row">
+            <input type="submit" class="mt-6 w-full items-center rounded-md bg-indigo-400 px-4 py-4 font-semibold text-white shadow-md transition duration-200 hover:bg-indigo-600 sm:mr-2 sm:w-1/2" value="Simpan">
 
-            <a href="{{ route('pegawai.index') }}" class="w-full sm:w-1/2 border px-4 py-4 rounded-md sm:ml-2 border-white text-indigo-400 font-medium text-lg hover:border-red-900 hover:text-red-900 transition duration-200">
+            <a href="{{ route('mobilitas.index') }}" class="w-full rounded-md border border-white px-4 py-4 text-lg font-medium text-indigo-400 transition duration-200 hover:border-red-900 hover:text-red-900 sm:ml-2 sm:w-1/2">
               Batal
             </a>
           </p>
