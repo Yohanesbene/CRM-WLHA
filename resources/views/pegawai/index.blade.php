@@ -24,7 +24,7 @@
       <div>
         @if (Session::has('message_success'))
           @for ($i = 0; $i < count(Session::get('message_success')); $i++)
-            <div class="mb-4 rounded-md border border-red-200 bg-green-100 py-3 px-5 text-sm text-green-900"
+            <div class="mb-4 rounded-md border border-green-200 bg-green-100 py-3 px-5 text-sm text-green-900"
               role="alert">
               {{ Session::get('message_success')[$i] }}
             </div>
@@ -60,8 +60,8 @@
                   <tr class="text-base uppercase leading-normal text-black">
                     <th class="py-3 px-6 text-left font-semibold">ID</th>
                     <th class="py-3 px-6 text-left font-semibold">Nama</th>
-                    <th class="py-3 px-6 text-left font-semibold">Status</th>
-                    <th class="py-3 px-6 text-left font-semibold">Role</th>
+                    <!-- <th class="py-3 px-6 text-left font-semibold">Status</th>
+                    <th class="py-3 px-6 text-left font-semibold">Role</th> -->
                     <th class="py-3 px-6 text-left font-semibold">Action</th>
                   </tr>
                 </thead>
@@ -77,22 +77,6 @@
                       <td class="whitespace-nowrap py-3 px-6 text-left">
                         <div class="flex items-center">
                           <span class="font-semibold">{{ $u->nama }}</span>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap py-3 px-6 text-left">
-                        <div class="flex items-center">
-                          @if ($u->status == 1)
-                            <span
-                              class="rounded-full bg-green-200 py-1 px-3 text-sm font-semibold text-green-700">Active</span>
-                          @else
-                            <span
-                              class="rounded-full bg-red-200 py-1 px-3 text-sm font-semibold text-red-700">Inactive</span>
-                          @endif
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap py-3 px-6 text-left">
-                        <div class="flex items-center">
-                          <span class="font-medium">{{ $u->role }}</span>
                         </div>
                       </td>
                       <td class="flex py-3 px-6">
@@ -157,16 +141,8 @@
               <div class="py-2 pr-4" id="detailNama"></div>
             </div>
             <div class="grid grid-cols-2">
-              <div class="py-2 pr-4 font-semibold">Username</div>
-              <div class="py-2 pr-4" id="detailUsername"></div>
-            </div>
-            <div class="grid grid-cols-2">
               <div class="py-2 pr-4 font-semibold">Jenis Kelamin</div>
               <div class="py-2 pr-4" id="detailJenisKelamin"></div>
-            </div>
-            <div class="grid grid-cols-2">
-              <div class="py-2 pr-4 font-semibold">Role User</div>
-              <div class="py-2 pr-4" id="detailRoleUser"></div>
             </div>
             <div class="grid grid-cols-2">
               <div class="py-2 pr-4 font-semibold">Alamat</div>
@@ -187,15 +163,6 @@
             <div class="grid grid-cols-2">
               <div class="py-2 pr-4 font-semibold">Agama</div>
               <div class="py-2 pr-4" id="detailAgama"></div>
-            </div>
-            <div class="grid grid-cols-2">
-              <div class="py-2 pr-4 font-semibold" id="detailStatusUser">Status User</div>
-              <div class="py-2 pr-4">
-                <span class="rounded-full bg-green-200 py-1 px-3 text-sm font-semibold text-green-700"
-                  id="detailActive">Active</span>
-                <span class="rounded-full bg-red-200 py-1 px-3 text-sm font-semibold text-red-700"
-                  id="detailInActive">Inactive</span>
-              </div>
             </div>
           </div>
         </div>
@@ -229,13 +196,9 @@
           },
           success: function(data) {
             document.getElementById("detailNama").innerHTML = data["0"]["nama"];
-            document.getElementById("detailUsername").innerHTML = data["0"][
-              "username"
-            ];
             document.getElementById("detailJenisKelamin").innerHTML = data["0"][
               "gender"
             ];
-            document.getElementById("detailRoleUser").innerHTML = data["0"]["role"];
             document.getElementById("detailAlamat").innerHTML = data["0"]["alamat"];
             document.getElementById("detailNoTelp").innerHTML = data["0"]["notelp"];
             document.getElementById("detailNIK").innerHTML = data["0"]["NIK"];
@@ -249,13 +212,6 @@
               $("#detailFoto").attr("src", 'https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png');
             }
             console.log(data["0"]["nama"]);
-            if (data["0"]["status"] == 0) {
-              $("#detailActive").hide();
-              $("#detailInActive").show();
-            } else {
-              $("#detailActive").show();
-              $("#detailInActive").hide();
-            }
           },
 
           error: function(data) {

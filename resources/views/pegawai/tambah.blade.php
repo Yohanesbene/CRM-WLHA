@@ -19,60 +19,14 @@
           enctype="multipart/form-data">
           @csrf
 
-          <div class="flex justify-between space-x-4">
-            <!-- Username Input -->
-            <div class="w-1/2 pr-4">
-              <x-label for="username" :value="__('Username')" />
-              <x-input id="username" type="text" name="username" :value="old('username')"
-                placeholder="Masukkan Username" autofocus autocomplete="off" />
-              @if (Session::has('error_update.username'))
-                {{ Session::get('error_update.username') }}
-                <br>
-              @endif
-            </div>
-            <div class="w-1/2">
-              <!-- nama Input -->
-              <x-label for="nama" :value="__('Nama Lengkap')" />
-              <x-input id="nama" type="text" name="nama" :value="old('nama')"
-                placeholder="Masukkan Nama Lengkap" autocomplete="off" />
-              @if (Session::has('error_update.nama'))
-                {{ Session::get('error_update.nama') }}
-                <br>
-              @endif
-            </div>
-          </div>
-
-          <!-- Password Input -->
-          <x-label for="password" :value="__('Password')" />
-          <x-input id="password" type="password" name="password" :value="old('password')"
-            placeholder="Masukkan Password" autocomplete="off" />
-          @if (Session::has('error_tambah.password'))
-            {{ Session::get('error_tambah.password') }}
+          <!-- nama Input -->
+          <x-label for="nama" :value="__('Nama Lengkap')" />
+          <x-input id="nama" type="text" name="nama" :value="old('nama')"
+            placeholder="Masukkan Nama Lengkap" autocomplete="off" />
+          @if (Session::has('error_update.nama'))
+            {{ Session::get('error_update.nama') }}
             <br>
           @endif
-
-          <!-- Password Confirmation Input -->
-          <x-label for="password_confirmation" :value="__('Re-type Password')" />
-          <x-input id="password_confirmation" type="password" name="password_confirmation"
-            :value="old('password_confirmation')" placeholder="Masukkan Ulang Password"
-            autocomplete="off" />
-          @if (Session::has('error_tambah.password_confirmation'))
-            {{ Session::get('error_tambah.password_confirmation') }}
-            <br>
-          @endif
-
-          <!-- Role User Input -->
-          <x-label for="id_level" :value="__('Role User')" />
-          <x-option-select id="id_level" name="id_level">
-            <x-slot name="option">
-              @if (!empty($role))
-                @foreach ($role as $r)
-                  <option value="{{ $r->id }}" @if (old('id_level') == $r->id) selected @endif>
-                    {{ $r->keterangan }}</option>
-                @endforeach
-              @endif
-            </x-slot>
-          </x-option-select>
 
           <!-- NIK Input -->
           <x-label for="nik" :value="__('NIK (Sesuai KTP)')" />
@@ -117,7 +71,7 @@
             @foreach (['katolik', 'kristen', 'islam', 'hindu', 'budha', 'khonghucu', 'kepercayaan'] as $agama)
               <x-label for="{{ $agama }}" class="flex p-2 cursor-pointer">
                 <input class="my-auto transform scale-125" type="radio" id="{{ $agama }}" name="agama"
-                  value="{{ $agama }}" checked="{{ old('agama') == $agama ? checked : null }}" />
+                  value="{{ $agama }}"   />
                 <div class="px-2">{{ ucfirst($agama) }}</div>
               </x-label>
             @endforeach
@@ -165,8 +119,15 @@
 
           <!-- Pekerjaan Input -->
           <x-label for="pekerjaan" :value="__('Pekerjaan')" />
-          <x-input id="title" type="text" name="title" :value="old('title')"
-            placeholder="Masukkan Pekerjaan Anda" autocomplete="off" />
+          <div class="flex flex-wrap">
+            @foreach (['Admin', 'Manajer', 'Penanggung Jawab', 'Asisten Perawat', 'Fisioterapi', 'Farmasi', 'Kantor'] as $title)
+              <x-label for="{{ $title }}" class="flex p-2 cursor-pointer">
+                <input class="my-auto transform scale-125" type="radio" id="{{ $title }}" name="title"
+                  value="{{ $title }}" />
+                <div class="px-2">{{ ucfirst($title) }}</div>
+              </x-label>
+            @endforeach
+          </div>
           @if (Session::has('error_tambah.pekerjaan'))
             {{ Session::get('error_tambah.pekerjaan') }}
             <br>
@@ -204,7 +165,7 @@
 
           <!-- Button Input -->
           <p class="flex flex-col sm:flex-row items-center justify-center mt-4 text-center text-lg text-gray-500 space-y-6 mb-6">
-            <input type="submit" class="w-full sm:w-1/2 mt-6 bg-indigo-400 sm:mr-2 px-4 py-4 rounded-md text-white font-semibold shadow-md items-center hover:bg-indigo-600 transition duration-200" value="Simpan">
+            <input type="submit" class="w-full sm:w-1/2 mt-6 bg-indigo-400 sm:mr-2 px-4 py-4 rounded-md text-white font-semibold shadow-md items-center hover:bg-indigo-600 transition duration-200 cursor-pointer" value="Simpan">
 
             <a href="{{ route('pegawai.index') }}" class="w-full sm:w-1/2 border px-4 py-4 rounded-md sm:ml-2 border-white text-indigo-400 font-medium text-lg hover:border-red-900 hover:text-red-900 transition duration-200">
               Batal

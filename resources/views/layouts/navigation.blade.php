@@ -138,7 +138,7 @@
           </svg>
           Inventarisasi
         </a>
-        <a href="{{ route('askep.index') }}"
+        <a href="#"
           class="flex mt-1 p-2 items-center space-x-4 font-semibold text-lg rounded-md border-2 transition duration-200
                     @if (in_array('inventaris', $routes_name)) {{ 'bg-indigo-600 text-white border-indigo-600' }}
                     @else

@@ -51,10 +51,6 @@ class PegawaiController extends Controller
         ];
 
         $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
-            'id_level' => 'required',
             'nama' => 'required',
             'nik' => 'required|regex:/^[0-9]+$/',
             'tgl_lahir' => 'required|date',
@@ -185,8 +181,6 @@ class PegawaiController extends Controller
         ];
 
         $this->validate($request, [
-            'username' => 'required',
-            'id_level' => 'required',
             'nama' => 'required',
             'nik' => 'required|regex:/^[0-9]+$/',
             'tgl_lahir' => 'required|date',
@@ -232,7 +226,7 @@ class PegawaiController extends Controller
         } else {
             $message_success = ['message_success' => ['Data Pegawai Berhasil diubah']];
 
-            return redirect('/admin/kepegawaian')->with($message_success);
+            return redirect('/pegawai')->with($message_success);
         }
 
         // return $extension;

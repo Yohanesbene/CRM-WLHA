@@ -59,8 +59,6 @@
                                     <tr class="text-black uppercase text-base leading-normal">
                                         <th class="text-left py-3 px-6 font-semibold">ID</th>
                                         <th class="text-left py-3 px-6 font-semibold">Nama</th>
-                                        <th class="text-left py-3 px-6 font-semibold">Status</th>
-                                        <th class="text-left py-3 px-6 font-semibold">Role</th>
                                         <th class="text-left py-3 px-6 font-semibold">Action</th>
                                     </tr>
                                 </thead>
@@ -76,22 +74,6 @@
                                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <span class="font-semibold">{{ $u->nama }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="py-3 px-6 text-left whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    @if ($u->status == 1)
-                                                        <span
-                                                            class="bg-green-200 text-green-700 font-semibold py-1 px-3 rounded-full text-sm">Active</span>
-                                                    @else
-                                                        <span
-                                                            class="bg-red-200 text-red-700 font-semibold py-1 px-3 rounded-full text-sm">Inactive</span>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                            <td class="py-3 px-6 text-left whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    <span class="font-medium">{{ $u->role }}</span>
                                                 </div>
                                             </td>
                                             <td class="flex py-3 px-6">
