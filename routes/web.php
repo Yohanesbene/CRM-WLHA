@@ -13,7 +13,7 @@ use App\Http\Controllers\PenghuniController;
 use App\Http\Controllers\MobilitasController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\MedicalCheckController;
-use App\Http\Controllers\AsuhanKeperawatanController;
+// use App\Http\Controllers\AsuhanKeperawatanController;
 
 
 /*
@@ -73,10 +73,10 @@ Route::group(['prefix' => 'penghuni', 'as' => 'penghuni.'], function () {
     Route::post('/data', [PenghuniController::class, 'data_penghuni'])->name('data');
 });
 
-Route::group(['prefix' => 'askep', 'as' => 'askep.'], function () {
-    Route::get('/', [AsuhanKeperawatanController::class, 'penghuni'])->name('index');
-    Route::post('/data', [AsuhanKeperawatanController::class, 'data_penghuni'])->name('data');
-});
+// Route::group(['prefix' => 'askep', 'as' => 'askep.'], function () {
+//     Route::get('/', [AsuhanKeperawatanController::class, 'penghuni'])->name('index');
+//     Route::post('/data', [AsuhanKeperawatanController::class, 'data_penghuni'])->name('data');
+// });
 
 Route::group(['prefix' => 'rekmed', 'as' => 'rekmed.'], function () {
     Route::get('/', [RekamMedisController::class, 'penghuni'])->name('index');
